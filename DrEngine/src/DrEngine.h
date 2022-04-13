@@ -2,8 +2,8 @@
 
 // FOR USE BY DRENGINE APPLICATIONS
 
-#include <stdio.h>
 #include "DrEngine/Application.h"
+#include "DrEngine/Log.h"
 
 //---------Entry Point-------------
 #include "DrEngine/EntryPoint.h"
