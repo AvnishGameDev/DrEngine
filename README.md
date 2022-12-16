@@ -1,2 +1,2 @@
 # DrEngine
-DrEngine 3D.
+DrEngine 2D.
