@@ -1,9 +1,15 @@
 # Directories
 
 .vs/
+.idea/
 bin/
 bin-int/
+vendor/
+DrEngine/vendor
 
 # Files
 
 *.user
+*.sln
+*.vcxproj
+*.vcxproj.filters
