@@ -8,12 +8,13 @@ int main(int argc, char** argv)
 {
 	DrEngine::Log::Init();
 	DE_CORE_WARN("Initialized Log!");
-	int a = 69;
-	DE_INFO("Hello! Var={0}", a);
+	DE_CORE_INFO("Welcome to DrEngine! Created by AvnishGameDev.");
 
 	auto app = DrEngine::CreateApplication();
 	app->Run();
 	delete app;
+	
+	return 0;
 }
 
 #endif

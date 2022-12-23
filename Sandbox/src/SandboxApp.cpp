@@ -3,9 +3,8 @@
 class Sandbox : public DrEngine::Application
 {
 public:
-	Sandbox()
+	Sandbox() : DrEngine::Application("Sandbox")
 	{
-
 	}
 
 	~Sandbox()
