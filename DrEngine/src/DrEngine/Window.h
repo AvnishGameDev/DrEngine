@@ -1,17 +1,34 @@
 #pragma once
 
 #include "Core.h"
+
+namespace DrEngine
+{
+    class Renderer;
+}
+
 #include "SDL.h"
 
-class DRENGINE_API Window
+namespace DrEngine
 {
-public:
-    Window();
-    ~Window();
+    class DRENGINE_API Window
+    {
+    public:
+        Window();
+        ~Window();
 
-    bool Initialize(const char* title, int width, int height, bool fullscreen);
-    void DestroyWindow();
+        bool Initialize(const char* title, int width, int height, bool fullscreen);
+        void DestroyWindow();
+
+        /* Getters and Setters */
     
-private:
-    SDL_Window* SDLwindow;
-};
+        void SetRenderer(Renderer* inRenderer);
+        Renderer* GetRenderer() const;
+
+        SDL_Window* GetSDLWindow() const;
+    
+    private:
+        SDL_Window* SDLwindow;
+        Renderer* renderer;
+    };
+}
