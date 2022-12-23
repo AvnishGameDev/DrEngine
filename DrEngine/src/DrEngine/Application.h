@@ -12,6 +12,13 @@ namespace DrEngine {
 		virtual ~Application();
 
 		void Run();
+
+		virtual void BeginPlay() = 0;
+		
+		virtual void Update() = 0;
+		
+		/* Getters and Setters */
+		Window* GetWindow() const { return window; }
 	private:
 		Window* window;
 
