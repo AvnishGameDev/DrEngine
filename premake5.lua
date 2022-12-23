@@ -8,7 +8,7 @@ workspace "DrEngine"
         "Dist"
     }
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}"
 
 project "DrEngine"
     location "DrEngine"
@@ -26,7 +26,19 @@ project "DrEngine"
 
     includedirs
     {
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{prj.name}/vendor/SDL2/include"
+    }
+
+    libdirs
+    {
+        "%{prj.name}/vendor/SDL2/lib/x64"
+    }
+
+    links
+    {
+        "SDL2.lib",
+        "SDL2main.lib"
     }
 
     filter "system:windows"
@@ -42,7 +54,8 @@ project "DrEngine"
 
         postbuildcommands
         {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/".. outputdir .. "/Sandbox")
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/".. outputdir .. "/Sandbox"), -- %{cfg.buildtarget.relpath} the build path, location of the .dll file in this case
+            ("{COPY} vendor/SDL2/lib/x64/SDL2.dll ../bin/".. outputdir .. "/Sandbox")
         }
 
     filter "configurations:Debug"
@@ -74,12 +87,20 @@ project "Sandbox"
     includedirs
     {
         "DrEngine/src",
-        "DrEngine/vendor/spdlog/include" 
+        "DrEngine/vendor/spdlog/include",
+        "DrEngine/vendor/SDL2/include"
+    }
+
+    libdirs
+    {
+        "DrEngine/vendor/SDL2/lib/x64"
     }
 
     links
     {
-        "DrEngine"
+        "DrEngine",
+        "SDL2.lib",
+        "SDL2main.lib"
     }
 
     filter "system:windows"
