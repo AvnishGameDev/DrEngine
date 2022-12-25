@@ -31,8 +31,8 @@ namespace DrEngine
 
     void Window::UpdateRender()
     {
-        SDL_RenderClear(GetRenderer()->GetSDLRenderer());
-        SDL_RenderPresent(GetRenderer()->GetSDLRenderer());
+        //SDL_RenderClear(GetRenderer()->GetSDLRenderer());
+        //SDL_RenderPresent(GetRenderer()->GetSDLRenderer());
     }
 
 #pragma region GettersAndSetters
