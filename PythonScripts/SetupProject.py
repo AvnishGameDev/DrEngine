@@ -1,21 +1,44 @@
 #!/usr/bin/env python3.1
-# Copyright Avnish Kirnalli 2022. Made for DrEngine.
+print('Copyright Avnish Kirnalli 2022. Made for DrEngine.')
 
 import os
 import shutil
+import subprocess
 from io import BytesIO
+
+# Module checks with Install option
+def yes_or_no(question):
+    reply = str(input(question + ' (y/n): ')).lower().strip()
+    if reply[0] == 'y':
+        return True
+    if reply[0] == 'n':
+        return False
+
+def InstallModule(package):
+    if yes_or_no(f'Package {package} not found. Do you want to install Python Package {package}?'):
+        subprocess.call(['pip', 'install', package])
+        os.system('cls')
+        os.system(f'python {os.getcwd()}/PythonScripts/SetupProject.py')
+        exit()
+    else:
+        exit()
+
 try:
     import requests
 except ImportError as e:
-    print('Python Module "requests" not installed')
+    InstallModule('requests')
 try:
     import zipfile
 except ImportError as e:
-    print('Python Module "zipfile" not installed')
+    InstallModule('zipfile')
 try:
     from tqdm import tqdm
 except ImportError as e:
-    print('Python Module "tqdm" not installed')
+    InstallModule('tqdm')
+try:
+    from colorama import Fore, Back, Style
+except ImportError as e:
+    InstallModule('colorama')
 
 os.chdir(f'{os.getcwd()}/PythonScripts')
 
@@ -26,7 +49,7 @@ def DownloadSDL():
     if os.path.exists(f'{os.getcwd()}/../DrEngine/vendor/SDL2'):
         f = open(f'{os.getcwd()}/../DrEngine/vendor/SDL2/version.txt')
         if f.read() == versionNo:
-            print('SDL2 Up-to date')
+            print(Fore.LIGHTBLUE_EX + 'SDL2 Up-to date')
             return
         else:
             print('SDL Outdated')
@@ -72,7 +95,7 @@ def DownloadSDL():
 
     shutil.move(f'{os.getcwd()}/SDL2', f'{os.getcwd()}/../DrEngine/vendor/SDL2')
 
-    print('SDL2 installed Successfully!')
+    print(Fore.BLUE + 'SDL2 installed Successfully!')
 
 def DownloadSPDLOG():
     response = requests.get("https://api.github.com/repos/gabime/spdlog/releases/latest")
@@ -82,7 +105,7 @@ def DownloadSPDLOG():
     if os.path.exists(f'{os.getcwd()}/../DrEngine/vendor/spdlog'):
         f = open(f'{os.getcwd()}/../DrEngine/vendor/spdlog/version.txt')
         if f.read() == versionNo:
-            print('SPDLOG Up-to date')
+            print(Fore.LIGHTBLUE_EX + 'SPDLOG Up-to date')
             return
         else:
             print('SPDLOG Outdated')
@@ -128,11 +151,11 @@ def DownloadSPDLOG():
 
     shutil.move(f'{os.getcwd()}/spdlog', f'{os.getcwd()}/../DrEngine/vendor/spdlog')
 
-    print('SPDLOG installed successfully!')
+    print(Fore.BLUE + 'SPDLOG installed successfully!')
 
 def DownloadPremake():
     if os.path.exists(f'{os.getcwd()}/../vendor/bin/premake'):
-        print('Premake Up-to date')
+        print(Fore.LIGHTBLUE_EX + 'Premake Up-to date')
         return
 
     print('Downloading Premake.')
@@ -173,12 +196,12 @@ def DownloadPremake():
 
     shutil.move('premake', '../vendor/bin/premake')
 
-    print('Premake installed successfully!')
+    print(Fore.BLUE + 'Premake installed successfully!')
 
 DownloadPremake()
 DownloadSPDLOG()
 DownloadSDL()
 
-print('Setup Complete! Run GenerateProjectFiles.bat to generate Visual Studio 2022 Solution.')
+print(Fore.GREEN + 'Setup Complete! Run GenerateProjectFiles.bat to generate Visual Studio 2022 Solution.')
 
 
