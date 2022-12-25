@@ -35,10 +35,6 @@ try:
     from tqdm import tqdm
 except ImportError as e:
     InstallModule('tqdm')
-try:
-    from colorama import Fore, Back, Style
-except ImportError as e:
-    InstallModule('colorama')
 
 os.chdir(f'{os.getcwd()}/PythonScripts')
 
@@ -49,7 +45,7 @@ def DownloadSDL():
     if os.path.exists(f'{os.getcwd()}/../DrEngine/vendor/SDL2'):
         f = open(f'{os.getcwd()}/../DrEngine/vendor/SDL2/version.txt')
         if f.read() == versionNo:
-            print(Fore.LIGHTBLUE_EX + 'SDL2 Up-to date')
+            print('SDL2 Up-to date')
             return
         else:
             print('SDL Outdated')
@@ -95,7 +91,7 @@ def DownloadSDL():
 
     shutil.move(f'{os.getcwd()}/SDL2', f'{os.getcwd()}/../DrEngine/vendor/SDL2')
 
-    print(Fore.BLUE + 'SDL2 installed Successfully!')
+    print('SDL2 installed Successfully!')
 
 def DownloadSPDLOG():
     response = requests.get("https://api.github.com/repos/gabime/spdlog/releases/latest")
@@ -105,7 +101,7 @@ def DownloadSPDLOG():
     if os.path.exists(f'{os.getcwd()}/../DrEngine/vendor/spdlog'):
         f = open(f'{os.getcwd()}/../DrEngine/vendor/spdlog/version.txt')
         if f.read() == versionNo:
-            print(Fore.LIGHTBLUE_EX + 'SPDLOG Up-to date')
+            print('SPDLOG Up-to date')
             return
         else:
             print('SPDLOG Outdated')
@@ -151,11 +147,11 @@ def DownloadSPDLOG():
 
     shutil.move(f'{os.getcwd()}/spdlog', f'{os.getcwd()}/../DrEngine/vendor/spdlog')
 
-    print(Fore.BLUE + 'SPDLOG installed successfully!')
+    print('SPDLOG installed successfully!')
 
 def DownloadPremake():
     if os.path.exists(f'{os.getcwd()}/../vendor/bin/premake'):
-        print(Fore.LIGHTBLUE_EX + 'Premake Up-to date')
+        print('Premake Up-to date')
         return
 
     print('Downloading Premake.')
@@ -196,12 +192,12 @@ def DownloadPremake():
 
     shutil.move('premake', '../vendor/bin/premake')
 
-    print(Fore.BLUE + 'Premake installed successfully!')
+    print('Premake installed successfully!')
 
 DownloadPremake()
 DownloadSPDLOG()
 DownloadSDL()
 
-print(Fore.GREEN + 'Setup Complete! Run GenerateProjectFiles.bat to generate Visual Studio 2022 Solution.')
+print('Setup Complete! Run GenerateProjectFiles.bat to generate Visual Studio 2022 Solution.')
 
 
