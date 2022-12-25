@@ -8,7 +8,7 @@ namespace DrEngine {
 	class DRENGINE_API Application
 	{
 	public:
-		Application(char* name);
+		Application(char* name = "App", int width = 800, int height = 600, bool fullscreen = false);
 		virtual ~Application();
 
 		void Run();

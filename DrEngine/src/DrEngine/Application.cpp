@@ -6,7 +6,7 @@
 
 namespace DrEngine {
 
-	Application::Application(char* name)
+	Application::Application(char* name, int width, int height, bool fullscreen)
 	{
 		AppName = name;
 
@@ -18,7 +18,7 @@ namespace DrEngine {
 
 		/* Creating Window */
 		window = new Window();
-		if (!window->Initialize(AppName, 800, 600, false))
+		if (!window->Initialize(AppName, width, height, fullscreen))
 		{
 			DE_CORE_ERROR("Window failed to initialize");
 		}
@@ -45,6 +45,7 @@ namespace DrEngine {
 		while (true)
 		{
 			Update();
+			window->UpdateRender();
 		}
 	}
 }

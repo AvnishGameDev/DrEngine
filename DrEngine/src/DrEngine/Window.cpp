@@ -1,5 +1,6 @@
 #include "Window.h"
 
+#include "Renderer.h"
 #include "SDL.h"
 
 namespace DrEngine
@@ -26,6 +27,12 @@ namespace DrEngine
     void Window::DestroyWindow()
     {
         SDL_DestroyWindow(SDLwindow);
+    }
+
+    void Window::UpdateRender()
+    {
+        SDL_RenderClear(GetRenderer()->GetSDLRenderer());
+        SDL_RenderPresent(GetRenderer()->GetSDLRenderer());
     }
 
 #pragma region GettersAndSetters

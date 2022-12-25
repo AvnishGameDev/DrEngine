@@ -20,6 +20,8 @@ namespace DrEngine
         bool Initialize(const char* title, int width, int height, bool fullscreen);
         void DestroyWindow();
 
+        void UpdateRender();
+        
         /* Getters and Setters */
     
         void SetRenderer(Renderer* inRenderer);

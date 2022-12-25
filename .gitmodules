@@ -1,3 +1,0 @@
-[submodule "DrEngine/vendor/spdlog"]
-	path = DrEngine/vendor/spdlog
-	url = https://github.com/gabime/spdlog
