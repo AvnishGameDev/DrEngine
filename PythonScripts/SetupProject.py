@@ -48,12 +48,12 @@ def DownloadSDL():
             print('SDL2 Up-to date')
             return
         else:
-            print('SDL Outdated')
+            print('SDL2 Outdated')
             print('Updating SDL2')
 
     print('Downloading SDL2')
 
-    print(f"SDL Version: {versionNo}")
+    print(f"SDL2 Version: {versionNo}")
 
     url = f'https://github.com/libsdl-org/SDL/releases/download/release-{versionNo}/SDL2-devel-{versionNo}-VC.zip'
     req = requests.get(url)
@@ -68,7 +68,7 @@ def DownloadSDL():
     print('Starting SDL2 Extraction')
 
     with zipfile.ZipFile(BytesIO(req.content)) as zf:
-        for member in tqdm(zf.infolist(), desc='Extracting SDL '):
+        for member in tqdm(zf.infolist(), desc='Extracting SDL2 '):
             try:
                 zf.extract(member, os.getcwd())
             except zipfile.error as e:
