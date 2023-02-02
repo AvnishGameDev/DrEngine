@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Core.h"
+#include "ECS/ECS.h"
 #include "Window.h"
 
 namespace DrEngine {
-
+	
 	class DRENGINE_API Application
 	{
 	public:
@@ -19,6 +20,8 @@ namespace DrEngine {
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
+
+		ECS::Manager* manager;
 	private:
 		Window* window;
 

@@ -1,5 +1,6 @@
 #include "Application.h"
 
+#include "ECS/ECS.h"
 #include "Log.h"
 #include "SDL.h"
 #include "Renderer.h"
@@ -32,6 +33,9 @@ namespace DrEngine {
 
 		/* Attaching Renderer to Window */
 		window->SetRenderer(ren);
+
+		/* Init Manager */
+		manager = new ECS::Manager();
 	}
 
 	Application::~Application()

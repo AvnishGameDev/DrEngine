@@ -1,6 +1,8 @@
 #include "DrEngine.h"
 #include "SDL.h"
 
+using namespace DrEngine::ECS;
+
 class Sandbox : public DrEngine::Application
 {
 public:
@@ -14,7 +16,7 @@ public:
 
 	virtual void BeginPlay() override
 	{
-		
+		cube = manager->AddEntity();
 	}
 
 	virtual void Update() override
@@ -24,7 +26,7 @@ public:
 		G = SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
 		B = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
 		
-		DE_INFO("Rendering Color frame, R: {0}, G: {1}, B: {2}, A: {3}", R, G, B, 255);
+		//DE_INFO("Rendering Color frame, R: {0}, G: {1}, B: {2}, A: {3}", R, G, B, 255);
 		SDL_SetRenderDrawColor(GetWindow()->GetRenderer()->GetSDLRenderer(), 0, 0, 0, 255);
 		SDL_RenderClear(GetWindow()->GetRenderer()->GetSDLRenderer());
 
@@ -35,7 +37,28 @@ public:
 		SDL_SetRenderDrawColor(GetWindow()->GetRenderer()->GetSDLRenderer(), R, G, B, 255);
 		SDL_RenderFillRect(GetWindow()->GetRenderer()->GetSDLRenderer(), &rect);
 		SDL_RenderPresent(GetWindow()->GetRenderer()->GetSDLRenderer());
+
+		if (i == 1000)
+		{
+			manager->DestroyEntity(cube);
+			DE_INFO("Cube Destroyed");
+		}
+		
+		if (cube && i == 10)
+		{
+			DE_INFO("Entity Cube is present! {0}", i);
+		}
+		else if (i == 1001)
+		{
+			DE_WARN("Entity Cube not found!");
+		}
+
+		i++;
 	}
+
+	Entity* cube;
+
+	int i{0};
 };
 
 DrEngine::Application* DrEngine::CreateApplication()
