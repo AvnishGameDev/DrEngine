@@ -18,14 +18,14 @@ namespace DrEngine::ECS
             
         }
 
-        void BeginPlay()
+        virtual void BeginPlay()
         {
             
         }
 
-        void Update()
+        virtual void Update()
         {
-            DE_INFO("Component Update");
+            
         }
     };
 }

@@ -1,5 +1,6 @@
 #include "DrEngine.h"
 #include "SDL.h"
+#include "Components/TestComp.h"
 
 using namespace DrEngine::ECS;
 
@@ -17,6 +18,9 @@ public:
 	virtual void BeginPlay() override
 	{
 		cube = manager->AddEntity();
+
+		cube->AddComponent<TestComp>(1);
+		cube->AddComponent<TestComp>(2);
 	}
 
 	virtual void Update() override
@@ -42,22 +46,15 @@ public:
 
 		if (i == 1000)
 		{
-			manager->DestroyEntity(cube);
-			DE_INFO("Cube Destroyed");
+			auto cc = cube->GetAllComponentsByClass<TestComp>();
+			for (auto c : cc)
+			{
+				c->PrintID();
+			}
 		}
 		
-		if (cube && i == 10)
-		{
-			DE_INFO("Entity Cube is present! {0}", i);
-		}
-		else if (i == 1001)
-		{
-			DE_WARN("Entity Cube not found!");
-		}
-
 		i++;
 	}
-
 	Entity* cube;
 
 	int i{0};

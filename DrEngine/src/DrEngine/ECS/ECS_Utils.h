@@ -9,8 +9,8 @@ namespace DrEngine::ECS::Utils
     }
 
     template <class DstType, class SrcType>
-    static DstType* Cast(const SrcType* src)
+    static DstType* Cast(SrcType* src)
     {
-        return dynamic_cast<const DstType*>(src);
+        return dynamic_cast<DstType*>(src);
     }
 }

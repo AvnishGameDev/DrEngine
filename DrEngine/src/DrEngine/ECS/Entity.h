@@ -40,7 +40,7 @@ namespace DrEngine::ECS
         template<class T, typename... Args>
         T* AddComponent(Args... args)
         {
-            auto c = new T(args...);
+            auto* c = new T(args...);
             Components.push_back(c);
             return c;
         }
@@ -52,7 +52,7 @@ namespace DrEngine::ECS
             {
                 if (Utils::IsType<T>(c))
                 {
-                    return c;
+                    return Utils::Cast<T>(c);
                 }
             }
             return nullptr;
