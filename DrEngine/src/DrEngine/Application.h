@@ -16,7 +16,7 @@ namespace DrEngine {
 
 		virtual void BeginPlay() = 0;
 		
-		virtual void Update() = 0;
+		virtual void Update();
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }

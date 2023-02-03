@@ -21,6 +21,8 @@ public:
 
 	virtual void Update() override
 	{
+		Application::Update();
+		
 		float R, G, B;
 		R = 0;
 		G = SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);

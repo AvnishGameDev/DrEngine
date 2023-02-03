@@ -52,4 +52,9 @@ namespace DrEngine {
 			window->UpdateRender();
 		}
 	}
+	
+	void Application::Update()
+	{
+		manager->Update();
+	}
 }
