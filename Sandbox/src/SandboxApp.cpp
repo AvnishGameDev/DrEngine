@@ -21,10 +21,11 @@ public:
 	{
 		cube = manager->AddEntity();
 		auto t = cube->AddComponent<TransformComponent>();
-		cube->AddComponent<RectComp>(t);
 		t->Location = Vector2D(100, 100);
 		t->Scale = Vector2D(100, 100);
-		cube->AddComponent<SineMovement>(t);
+		
+		cube->AddComponent<RectComp>();
+		cube->AddComponent<SineMovement>();
 	}
 
 	virtual void Update() override

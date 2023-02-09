@@ -21,11 +21,7 @@ namespace DrEngine::ECS
 
         void BeginPlay()
         {
-            for (auto c : Components)
-            {
-                if (c)
-                    c->BeginPlay();
-            }
+            
         }
 
         void Update()
@@ -51,6 +47,7 @@ namespace DrEngine::ECS
         {
             auto* c = new T(args...);
             c->owner = this;
+            c->BeginPlay();
             Components.push_back(c);
             return c;
         }

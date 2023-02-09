@@ -11,14 +11,10 @@ namespace DrEngine::ECS
     class DRENGINE_API RectComp : public Component
     {
     public:
-        RectComp(TransformComponent* inTransform)
-        {
-            transform = inTransform;
-        }
 
         RectComp()
         {
-            //transform = GetOwner()->GetComponentByClass<TransformComponent>();
+            
         }
         
         ~RectComp()
@@ -28,7 +24,11 @@ namespace DrEngine::ECS
 
         void BeginPlay() override
         {
-            
+            transform = GetOwner()->GetComponentByClass<TransformComponent>();
+            if (!transform)
+            {
+                DE_WARN("TransformComponent not found");
+            }
         }
 
         void Update() override
