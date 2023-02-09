@@ -5,15 +5,16 @@
 
 namespace DrEngine::ECS
 {
+    class Entity;
+    
     class DRENGINE_API Component
     {
     public:
         Component()
         {
-            
         }
 
-        ~Component()
+        virtual ~Component()
         {
             
         }
@@ -27,5 +28,10 @@ namespace DrEngine::ECS
         {
             
         }
+
+        Entity* GetOwner() const { return owner; };
+
+        
+        Entity* owner;
     };
 }

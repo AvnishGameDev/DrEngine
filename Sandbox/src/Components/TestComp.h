@@ -12,7 +12,7 @@ public:
         TestCompNo = testno;
     }
 
-    ~TestComp()
+    ~TestComp() override
     {
         
     }
@@ -29,7 +29,7 @@ public:
 
     void PrintID()
     {
-        DE_INFO("TestComp ID: {0}", TestCompNo);
+        DE_INFO("TestComp ID: {0}, OwnerValid: {1}", TestCompNo, GetOwner() != nullptr);
     }
 
 private:

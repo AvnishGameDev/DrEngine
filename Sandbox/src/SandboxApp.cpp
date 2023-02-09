@@ -18,9 +18,8 @@ public:
 	virtual void BeginPlay() override
 	{
 		cube = manager->AddEntity();
-
-		cube->AddComponent<TestComp>(1);
-		cube->AddComponent<TestComp>(2);
+		//cube->AddComponent<TransformComponent>();
+		//cube->AddComponent<RectComp>();
 	}
 
 	virtual void Update() override
@@ -40,18 +39,10 @@ public:
 		const int posY = 500.0f / 2.0f + SDL_cosf(SDL_GetTicks() / 1000.0f) * (500.0f / 2.0f);
 		
 		SDL_Rect rect = {posX, posY, 100, 100};
+		
 		SDL_SetRenderDrawColor(GetWindow()->GetRenderer()->GetSDLRenderer(), R, G, B, 255);
 		SDL_RenderFillRect(GetWindow()->GetRenderer()->GetSDLRenderer(), &rect);
 		SDL_RenderPresent(GetWindow()->GetRenderer()->GetSDLRenderer());
-
-		if (i == 1000)
-		{
-			auto cc = cube->GetAllComponentsByClass<TestComp>();
-			for (auto c : cc)
-			{
-				c->PrintID();
-			}
-		}
 		
 		i++;
 	}

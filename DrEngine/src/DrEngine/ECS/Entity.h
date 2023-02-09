@@ -41,6 +41,7 @@ namespace DrEngine::ECS
         T* AddComponent(Args... args)
         {
             auto* c = new T(args...);
+            c->owner = this;
             Components.push_back(c);
             return c;
         }

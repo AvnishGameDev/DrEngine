@@ -11,3 +11,6 @@
 #include "Entity.h"
 #include "Component.h"
 
+#include "Components/RectComp.h"
+#include "Components/TransformComponent.h"
+
