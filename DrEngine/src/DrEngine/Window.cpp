@@ -29,12 +29,6 @@ namespace DrEngine
         SDL_DestroyWindow(SDLwindow);
     }
 
-    void Window::UpdateRender()
-    {
-        //SDL_RenderClear(GetRenderer()->GetSDLRenderer());
-        //SDL_RenderPresent(GetRenderer()->GetSDLRenderer());
-    }
-
 #pragma region GettersAndSetters
     
     void Window::SetRenderer(Renderer* inRenderer)

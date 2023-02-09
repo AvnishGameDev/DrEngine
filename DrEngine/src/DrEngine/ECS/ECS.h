@@ -4,6 +4,8 @@
 #define MAX_COMPONENTS 1024
 
 #include "../Core.h"
+#include "../Application.h"
+#include "../Renderer.h"
 
 #include "ECS_Utils.h"
 

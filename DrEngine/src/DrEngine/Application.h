@@ -1,11 +1,14 @@
 #pragma once
 
 #include "Core.h"
-#include "ECS/ECS.h"
-#include "Window.h"
+#include "Window.h";
 
 namespace DrEngine {
-	
+	namespace ECS
+	{
+		class Manager;
+	}
+
 	class DRENGINE_API Application
 	{
 	public:
@@ -19,10 +22,12 @@ namespace DrEngine {
 		virtual void Update();
 
 		virtual void Draw();
+
+		static Renderer* renderer;
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
-
+		
 		ECS::Manager* manager;
 	private:
 		Window* window;
