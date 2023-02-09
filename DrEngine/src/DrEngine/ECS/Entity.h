@@ -36,6 +36,15 @@ namespace DrEngine::ECS
                     c->Update();
             }
         }
+
+        void Draw()
+        {
+            for (auto c : Components)
+            {
+                if (c)
+                    c->Draw();
+            }
+        }
         
         template<class T, typename... Args>
         T* AddComponent(Args... args)

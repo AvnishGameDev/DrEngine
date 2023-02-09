@@ -49,6 +49,7 @@ namespace DrEngine {
 		while (true)
 		{
 			Update();
+			Draw();
 			window->UpdateRender();
 		}
 	}
@@ -56,5 +57,10 @@ namespace DrEngine {
 	void Application::Update()
 	{
 		manager->Update();
+	}
+
+	void Application::Draw()
+	{
+		manager->Draw();
 	}
 }

@@ -43,6 +43,15 @@ namespace DrEngine::ECS
                     e->Update();
             }
         }
+
+        void Draw()
+        {
+            for (auto e : Entities)
+            {
+                if (e)
+                    e->Draw();
+            }
+        }
         
     private:
         

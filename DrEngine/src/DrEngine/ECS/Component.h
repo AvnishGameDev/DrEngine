@@ -29,6 +29,11 @@ namespace DrEngine::ECS
             
         }
 
+        virtual void Draw()
+        {
+            
+        }
+
         Entity* GetOwner() const { return owner; };
 
         

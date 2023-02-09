@@ -27,6 +27,11 @@ public:
         Component::Update();
     }
 
+    void Draw() override
+    {
+        Component::Draw();
+    }
+
     void PrintID()
     {
         DE_INFO("TestComp ID: {0}, OwnerValid: {1}", TestCompNo, GetOwner() != nullptr);

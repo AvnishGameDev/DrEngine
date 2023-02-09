@@ -2,6 +2,7 @@
 #include "SDL.h"
 #include "Components/TestComp.h"
 
+using namespace DrEngine;
 using namespace DrEngine::ECS;
 
 class Sandbox : public DrEngine::Application
@@ -38,8 +39,10 @@ public:
 		const int posX = 700.0f  / 2.0f + SDL_sinf(SDL_GetTicks() / 1000.0f * 3.18378f) * (700.0f / 2.0f);
 		const int posY = 500.0f / 2.0f + SDL_cosf(SDL_GetTicks() / 1000.0f) * (500.0f / 2.0f);
 		
+		//cube->GetComponentByClass<TransformComponent>()->Location = Vector2D(posX, posY);
+		//cube->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
+
 		SDL_Rect rect = {posX, posY, 100, 100};
-		
 		SDL_SetRenderDrawColor(GetWindow()->GetRenderer()->GetSDLRenderer(), R, G, B, 255);
 		SDL_RenderFillRect(GetWindow()->GetRenderer()->GetSDLRenderer(), &rect);
 		SDL_RenderPresent(GetWindow()->GetRenderer()->GetSDLRenderer());

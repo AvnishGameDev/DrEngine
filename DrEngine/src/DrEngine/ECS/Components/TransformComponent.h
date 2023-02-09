@@ -23,7 +23,7 @@ namespace DrEngine::ECS
         Vector2D GetLocation() const { return Location; };
         Vector2D GetScale() const { return Scale; };
         Vector2D GetVelocity() const { return Velocity; };
-    private:
+
         Vector2D Location;
         Vector2D Scale;
         Vector2D Velocity;
