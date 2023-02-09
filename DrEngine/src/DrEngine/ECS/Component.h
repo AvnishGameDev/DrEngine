@@ -35,7 +35,6 @@ namespace DrEngine::ECS
         }
 
         Entity* GetOwner() const { return owner; };
-
         
         Entity* owner;
     };
