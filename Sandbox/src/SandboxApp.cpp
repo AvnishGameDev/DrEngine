@@ -1,5 +1,6 @@
 #include "DrEngine.h"
 #include "SDL.h"
+#include "Components/ScaleBlendComp.h"
 #include "Components/TrigMovement.h"
 
 using namespace DrEngine;
@@ -20,13 +21,13 @@ public:
 	{
 		auto e1 = manager->AddEntity();
 		e1->AddComponent<TransformComponent>();
-		e1->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
+		e1->GetComponentByClass<TransformComponent>()->Location = Vector2D(0, 0);
 		e1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
 		e1->AddComponent<RectComp>();
-		e1->AddComponent<TrigMovement>(Sin, true);
-		e1->AddComponent<CircleComp>();
+		e1->AddComponent<TrigMovement>(Sin, false);
 		Entities.push_back(e1);
-
+		
+		
 		auto e2 = manager->AddEntity();
 		e2->AddComponent<TransformComponent>();
 		e2->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
@@ -42,6 +43,7 @@ public:
 		e3->AddComponent<RectComp>();
 		e3->AddComponent<TrigMovement>(Tan, false);
 		Entities.push_back(e3);
+		
 	}
 
 	virtual void Update() override

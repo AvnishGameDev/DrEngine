@@ -12,9 +12,9 @@ namespace DrEngine::ECS
     {
     public:
 
-        RectComp()
+        RectComp(bool inInvertColor = false)
         {
-            
+            bInvertColor = inInvertColor;
         }
         
         ~RectComp()
@@ -48,6 +48,12 @@ namespace DrEngine::ECS
             R = 0;
             G = SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
             B = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+
+            if (bInvertColor)
+            {
+                G = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+                B = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+            }
             
             SDL_SetRenderDrawColor(Application::renderer->GetSDLRenderer(), R, G, B, 255);
             SDL_RenderFillRect(Application::renderer->GetSDLRenderer(), &rect);
@@ -56,6 +62,8 @@ namespace DrEngine::ECS
         SDL_Rect* GetRect() { return &rect; };
         
     private:
+        bool bInvertColor{false};
+        
         TransformComponent* transform;
 
         SDL_Rect rect;
