@@ -24,6 +24,7 @@ public:
 		e1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
 		e1->AddComponent<RectComp>();
 		e1->AddComponent<TrigMovement>(Sin, true);
+		e1->AddComponent<CircleComp>();
 		Entities.push_back(e1);
 
 		auto e2 = manager->AddEntity();
