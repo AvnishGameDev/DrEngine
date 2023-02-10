@@ -21,29 +21,18 @@ public:
 	{
 		auto e1 = manager->AddEntity();
 		e1->AddComponent<TransformComponent>();
-		e1->GetComponentByClass<TransformComponent>()->Location = Vector2D(0, 0);
+		e1->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
 		e1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
-		e1->AddComponent<RectComp>();
-		e1->AddComponent<TrigMovement>(Sin, false);
+		e1->AddComponent<RectComp>(0, 255, 0);
 		Entities.push_back(e1);
 		
 		
-		auto e2 = manager->AddEntity();
+		auto e2 = manager->AddEntity(PlayerComp);
 		e2->AddComponent<TransformComponent>();
-		e2->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
+		e2->GetComponentByClass<TransformComponent>()->Location = Vector2D(150, 100);
 		e2->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
-		e2->AddComponent<RectComp>();
-		e2->AddComponent<TrigMovement>(Cos, false);
+		e2->AddComponent<RectComp>(0, 0, 255);
 		Entities.push_back(e2);
-
-		auto e3 = manager->AddEntity();
-		e3->AddComponent<TransformComponent>();
-		e3->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
-		e3->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
-		e3->AddComponent<RectComp>();
-		e3->AddComponent<TrigMovement>(Tan, false);
-		Entities.push_back(e3);
-		
 	}
 
 	virtual void Update() override
