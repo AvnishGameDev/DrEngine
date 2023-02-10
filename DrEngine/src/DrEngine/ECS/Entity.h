@@ -6,18 +6,28 @@
 
 namespace DrEngine::ECS
 {
+    enum Batch
+    {
+        Tile,       // Ground, most back
+        Prop,       // Above Ground
+        Player,     // Above Props and Ground
+        PlayerComp  // Above everything
+    };
+    
     class DRENGINE_API Entity
     {
     public:
-
-        Entity()
-        {
-            name = rand();
-        }
         
-        Entity(std::string inName)
+        Entity(std::string inName, Batch inBatch = Player)
         {
             name = inName;
+            batch = inBatch;
+        }
+
+        Entity(Batch inBatch = Player)
+        {
+            name = rand();
+            batch = inBatch;
         }
         
         ~Entity()
@@ -87,8 +97,12 @@ namespace DrEngine::ECS
 
         std::string GetName() const { return name; };
 
+        Batch GetBatch() const { return batch; };
+        
     private:
 
+        Batch batch;
+        
         std::string name;
         
         std::vector<Component*> Components;
