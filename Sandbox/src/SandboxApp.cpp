@@ -1,7 +1,6 @@
 #include "DrEngine.h"
 #include "SDL.h"
-#include "Components/SineMovement.h"
-#include "Components/TestComp.h"
+#include "Components/TrigMovement.h"
 
 using namespace DrEngine;
 using namespace DrEngine::ECS;
@@ -19,18 +18,29 @@ public:
 
 	virtual void BeginPlay() override
 	{
-		cube1 = manager->AddEntity("cube1");
-		auto t1 = cube1->AddComponent<TransformComponent>();
-		t1->Location = Vector2D(100, 100);
-		t1->Scale = Vector2D(100, 100);
-		cube1->AddComponent<RectComp>();
+		auto e1 = manager->AddEntity();
+		e1->AddComponent<TransformComponent>();
+		e1->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
+		e1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
+		e1->AddComponent<RectComp>();
+		e1->AddComponent<TrigMovement>(Sin, true);
+		Entities.push_back(e1);
 
-		cube2 = manager->AddEntity("cube2");
-		auto t2 = cube2->AddComponent<TransformComponent>();
-		t2->Location = Vector2D(240, 100);
-		t2->Scale = Vector2D(100, 100);
-		cube2->AddComponent<RectComp>();
-		cube2->AddComponent<SineMovement>();
+		auto e2 = manager->AddEntity();
+		e2->AddComponent<TransformComponent>();
+		e2->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
+		e2->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
+		e2->AddComponent<RectComp>();
+		e2->AddComponent<TrigMovement>(Cos, false);
+		Entities.push_back(e2);
+
+		auto e3 = manager->AddEntity();
+		e3->AddComponent<TransformComponent>();
+		e3->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
+		e3->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
+		e3->AddComponent<RectComp>();
+		e3->AddComponent<TrigMovement>(Tan, false);
+		Entities.push_back(e3);
 	}
 
 	virtual void Update() override
@@ -46,8 +56,7 @@ public:
 		
 	}
 
-	Entity* cube1;
-	Entity* cube2;
+	std::vector<Entity*> Entities;
 	
 	int i{0};
 };
