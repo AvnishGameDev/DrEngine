@@ -9,9 +9,15 @@ namespace DrEngine::ECS
     class DRENGINE_API Entity
     {
     public:
+
         Entity()
         {
-            
+            name = rand();
+        }
+        
+        Entity(std::string inName)
+        {
+            name = inName;
         }
         
         ~Entity()
@@ -79,8 +85,12 @@ namespace DrEngine::ECS
             return ClassComponents;
         }
 
+        std::string GetName() const { return name; };
+
     private:
 
+        std::string name;
+        
         std::vector<Component*> Components;
         
     };

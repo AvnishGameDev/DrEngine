@@ -63,7 +63,9 @@ namespace DrEngine {
 	void Application::Draw()
 	{
 		SDL_RenderClear(Application::renderer->GetSDLRenderer());
+		
 		manager->Draw(); // Calls Draw() on all Entities and Components
+		
 		SDL_SetRenderDrawColor(Application::renderer->GetSDLRenderer(), 0, 0, 0, 255);	// Let components draw color without worrying to set the colour back to default (black) before
 		SDL_RenderPresent(Application::renderer->GetSDLRenderer());								// rendering next frame, if color not set to default then whole screen will be colored the RenderDrawColor.
 	}
