@@ -1,8 +1,8 @@
+:: Copyright Avnish Kirnalli 2022.
+
 @echo off
 
 @echo off & title Setup DrEngine
-
-:: Copyright Avnish Kirnalli 2022.
 
 goto :DOES_PYTHON_EXIST
 
@@ -18,10 +18,6 @@ start "" "https://www.python.org/downloads/windows/"
 goto :EOF
 
 :PYTHON_DOES_EXIST
-:: This will retrieve Python 3.8.0 for example.
-for /f "delims=" %%V in ('python -V') do @set ver=%%V
-echo Python %ver% found
-
 python PythonScripts/SetupProject.py
 
 :EOF
