@@ -13,7 +13,7 @@ goto :EOF
 
 :PYTHON_DOES_NOT_EXIST
 echo Python is not installed on your system.
-echo Now opeing the download URL.
+echo Now opening the download URL.
 start "" "https://www.python.org/downloads/windows/"
 goto :EOF
 

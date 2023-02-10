@@ -48,8 +48,9 @@ def DownloadSDL():
             print('SDL2 Up-to date')
             return
         else:
-            print('SDL2 Outdated')
-            print('Updating SDL2')
+            print('!!!!!!!!!!SDL2 Outdated. Delete DrEngine/Vendor folder then relaunch the script!!!!!!!!!!!!!!!!!!!')
+            print(f'"{os.getcwd()}/../DrEngine/vendor"')
+            exit()
 
     print('Downloading SDL2')
 
@@ -104,8 +105,9 @@ def DownloadSPDLOG():
             print('SPDLOG Up-to date')
             return
         else:
-            print('SPDLOG Outdated')
-            print('Updating SPDLOG')
+            print('!!!!!!!!!!SPDLOG Outdated. Delete DrEngine/Vendor folder then relaunch the script!!!!!!!!!!!!!!!!!!!')
+            print(f'"{os.getcwd()}/../DrEngine/vendor"')
+            exit()
 
     print('Downloading SPDLOG.')
 
