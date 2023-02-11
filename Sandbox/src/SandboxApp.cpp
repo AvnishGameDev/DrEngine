@@ -28,7 +28,7 @@ public:
 		p1->AddComponent<TransformComponent>();
 		p1->GetComponentByClass<TransformComponent>()->Location = Vector2D(20, 200);
 		p1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(10, 100);
-		p1->AddComponent<RectComp>();
+		p1->AddComponent<RectComp>(0, 255, 0);
 		p1->AddComponent<CollisionComponent>();
 		p1->AddComponent<PaddleController>();
 		paddles.push_back(p1);
@@ -37,7 +37,7 @@ public:
 		p2->AddComponent<TransformComponent>();
 		p2->GetComponentByClass<TransformComponent>()->Location = Vector2D(760, 200);
 		p2->GetComponentByClass<TransformComponent>()->Scale = Vector2D(10, 100);
-		p2->AddComponent<RectComp>();
+		p2->AddComponent<RectComp>(0, 0, 255);
 		p2->AddComponent<CollisionComponent>();
 		p2->AddComponent<PaddleController>();
 		paddles.push_back(p2);
@@ -47,7 +47,7 @@ public:
 		Ball->GetComponentByClass<TransformComponent>()->Location = Vector2D(280, 280);
 		Ball->GetComponentByClass<TransformComponent>()->Scale = Vector2D(12, 12);
 		Ball->GetComponentByClass<TransformComponent>()->Velocity = Vector2D(0.1f, -0.1f);
-		Ball->AddComponent<RectComp>();
+		Ball->AddComponent<RectComp>(true);
 		Ball->AddComponent<CollisionComponent>();
 		Ball->AddComponent<BallComponent>(paddles);
 	}
