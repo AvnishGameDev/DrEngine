@@ -6,9 +6,9 @@ Under Development.
 Developed by AvnishGameDev.
 
 ## Pre-Requisites
-Python 10
-Visual Studio 2019 or above with Desktop Development tools
-Active Internet connection to download external dependencies
+..* **Python 10** or above
+..* **Visual Studio 2019** or above with Desktop Development tools
+..* **Active Internet connection** to download external dependencies
 
 ## Steps to Setup Project
 1. Clone or Download Zip from GitHub
