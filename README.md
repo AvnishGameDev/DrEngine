@@ -1,9 +1,7 @@
 # DrEngine
-Copyright Avnish Kirnalli 2022.
-DrEngine, DrEngine 2D.
 
-Under Development.
-Developed by AvnishGameDev.
+**Under Development.**
+Being Developed by AvnishGameDev.
 
 ## Pre-Requisites
 * **Python 10** or above
@@ -17,3 +15,6 @@ Developed by AvnishGameDev.
 4. Run GenerateProject.bat
 5. Open the Generated Solution in Visual Studio
 6. Set Sandbox as Startup Project
+
+Copyright **Avnish Kirnalli** 2022.
+DrEngine, DrEngine 2D.
