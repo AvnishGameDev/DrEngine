@@ -68,6 +68,29 @@ namespace DrEngine::ECS
             return c;
         }
 
+        void RemoveComponent(Component* c)
+        {
+            for (auto itr = Components.begin(); itr < Components.end(); ++itr)
+            {
+                if (*itr == c)
+                {
+                    Components.erase(itr);
+                }
+            }
+        }
+        
+        template<class T>
+        void RemoveComponentByClass()
+        {
+            for (auto itr = Components.begin(); itr < Components.end(); ++itr)
+            {
+                if (Utils::IsType<T>(*itr))
+                {
+                    Components.erase(itr);
+                }
+            }
+        }
+
         template<class T>
         T* GetComponentByClass()
         {
