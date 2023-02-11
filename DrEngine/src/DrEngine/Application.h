@@ -24,6 +24,8 @@ namespace DrEngine {
 		virtual void Draw();
 
 		static Renderer* renderer;
+		static SDL_Event event;
+		static bool Keys[1024];
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }

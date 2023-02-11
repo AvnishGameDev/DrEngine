@@ -8,6 +8,8 @@
 namespace DrEngine {
 
 	Renderer* Application::renderer = nullptr;
+	SDL_Event Application::event;
+	bool Application::Keys[1024];
 	
 	Application::Application(char* name, int width, int height, bool fullscreen)
 	{
@@ -50,6 +52,19 @@ namespace DrEngine {
 		BeginPlay();
 		while (true)
 		{
+			while (SDL_PollEvent(&Application::event))
+			{
+				switch (event.type)
+				{
+				case SDL_KEYDOWN:
+					Application::Keys[event.key.keysym.sym] = true;
+					break;
+				case SDL_KEYUP:
+					Application::Keys[event.key.keysym.sym] = false;
+					break;
+				}
+			}
+			
 			Update();
 			Draw();
 		}
