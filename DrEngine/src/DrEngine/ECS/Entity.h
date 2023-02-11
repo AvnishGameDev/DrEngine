@@ -121,6 +121,8 @@ namespace DrEngine::ECS
         std::string GetName() const { return name; };
 
         Batch GetBatch() const { return batch; };
+
+        void SetBatch(Batch inBatch) { batch = inBatch; };
         
     private:
 
