@@ -15,4 +15,6 @@
 
 #include "Components/RectComp.h"
 #include "Components/TransformComponent.h"
+#include "Components/CircleComp.h"
+#include "Components/CollisionComponent.h"
 

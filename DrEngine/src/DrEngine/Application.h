@@ -1,12 +1,19 @@
 #pragma once
 
+#include <map>
+#include <vector>
+
 #include "Core.h"
-#include "Window.h";
+#include "Window.h"
 
 namespace DrEngine {
+
+	class InputManager;
+	
 	namespace ECS
 	{
 		class Manager;
+		class CollisionComponent;
 	}
 
 	class DRENGINE_API Application
@@ -17,13 +24,16 @@ namespace DrEngine {
 
 		void Run();
 
-		virtual void BeginPlay() = 0;
+		virtual void BeginPlay();
 		
 		virtual void Update();
 
 		virtual void Draw();
 
 		static Renderer* renderer;
+		static SDL_Event event;
+		static InputManager* inputManager;
+		static std::vector<ECS::CollisionComponent*> Colliders;
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }

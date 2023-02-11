@@ -12,6 +12,12 @@ namespace DrEngine
             x = 0;
             y = 0;
         }
+
+        Vector2D(float n)
+        {
+            x = n;
+            y = n;
+        }
         
         Vector2D(float inX, float inY)
         {
@@ -25,6 +31,48 @@ namespace DrEngine
         void SetY(float inVal) { y = inVal; }
 
         static Vector2D Zero() { return Vector2D(); };
+
+        bool operator == (const Vector2D& vec2) const
+        {
+            return this->X() == vec2.X() && this->Y() == vec2.Y();
+        }
+        
+        Vector2D operator + (const Vector2D& vec2) const
+        {
+            Vector2D finalVec;
+            finalVec.SetX(this->X() + vec2.X());
+            finalVec.SetY(this->Y() + vec2.Y());
+            return finalVec;
+        }
+
+        Vector2D operator - (const Vector2D& vec2) const
+        {
+            Vector2D finalVec;
+            finalVec.SetX(this->X() - vec2.X());
+            finalVec.SetY(this->Y() - vec2.Y());
+            return finalVec;
+        }
+
+        Vector2D operator += (const Vector2D& vec2)
+        {
+            this->SetX(this->X() + vec2.X());
+            this->SetY(this->Y() + vec2.Y());
+            return *this;
+        }
+
+        Vector2D operator -= (const Vector2D& vec2)
+        {
+            this->SetX(this->X() - vec2.X());
+            this->SetY(this->Y() - vec2.Y());
+            return *this;
+        }
+
+        Vector2D operator *= (const int n)
+        {
+            this->SetX(this->x * n);
+            this->SetY(this->Y() * n);
+            return *this;
+        }
         
     private:
         float x{0};

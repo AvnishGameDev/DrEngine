@@ -4,10 +4,14 @@
 #include "Log.h"
 #include "SDL.h"
 #include "Renderer.h"
+#include "InputManager.h"
 
 namespace DrEngine {
 
 	Renderer* Application::renderer = nullptr;
+	SDL_Event Application::event;
+	InputManager* Application::inputManager;
+	std::vector<ECS::CollisionComponent*> Application::Colliders;
 	
 	Application::Application(char* name, int width, int height, bool fullscreen)
 	{
@@ -50,13 +54,32 @@ namespace DrEngine {
 		BeginPlay();
 		while (true)
 		{
+			SDL_PumpEvents();
+			while (SDL_PollEvent(&Application::event))
+			{
+				Application::inputManager->PollEvent();
+				if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) || event.type == SDL_QUIT)
+				{
+					SDL_Quit();
+					return;
+				}
+			}
+			
 			Update();
 			Draw();
+			
+			Application::inputManager->ResetMouseDelta();
 		}
 	}
-	
+
+	void Application::BeginPlay()
+	{
+		inputManager = new InputManager();
+	}
+
 	void Application::Update()
 	{
+		Application::inputManager->Update();
 		manager->Update();
 	}
 

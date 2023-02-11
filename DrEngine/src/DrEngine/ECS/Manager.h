@@ -47,10 +47,46 @@ namespace DrEngine::ECS
 
         void Draw()
         {
+            std::vector<Entity*> TileEntities;
+            std::vector<Entity*> PropEntities;
+            std::vector<Entity*> PlayerEntities;
+            std::vector<Entity*> PlayerCompEntities;
             for (auto e : Entities)
             {
-                if (e)
-                    e->Draw();
+                switch (e->GetBatch())
+                {
+                case Tile:
+                    TileEntities.push_back(e);
+                    break;
+                case Prop:
+                    PropEntities.push_back(e);
+                    break;
+                case Player:
+                    PlayerEntities.push_back(e);
+                    break;
+                case PlayerComp:
+                    PlayerCompEntities.push_back(e);
+                    break;
+                }
+            }
+
+            /* Batch Rendering */
+
+            for (auto e : TileEntities)
+            {
+                e->Draw();
+            }
+            for (auto e : PropEntities)
+            {
+                e->Draw();
+            }
+            for (auto e : PlayerEntities)
+            {
+                e->Draw();
+            }
+            for (auto e : PlayerCompEntities)
+            {
+                e->Draw();
             }
         }
         
