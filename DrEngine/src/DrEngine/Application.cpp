@@ -9,7 +9,6 @@ namespace DrEngine {
 
 	Renderer* Application::renderer = nullptr;
 	SDL_Event Application::event;
-	bool Application::Keys[1024];
 	
 	Application::Application(char* name, int width, int height, bool fullscreen)
 	{
@@ -52,16 +51,13 @@ namespace DrEngine {
 		BeginPlay();
 		while (true)
 		{
+			SDL_PumpEvents();
 			while (SDL_PollEvent(&Application::event))
 			{
-				switch (event.type)
+				if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) || event.type == SDL_QUIT)
 				{
-				case SDL_KEYDOWN:
-					Application::Keys[event.key.keysym.sym] = true;
-					break;
-				case SDL_KEYUP:
-					Application::Keys[event.key.keysym.sym] = false;
-					break;
+					SDL_Quit();
+					return;
 				}
 			}
 			

@@ -1,5 +1,6 @@
 #include "DrEngine.h"
 #include "SDL.h"
+#include "Components/CubeController.h"
 #include "Components/ScaleBlendComp.h"
 #include "Components/TrigMovement.h"
 
@@ -24,6 +25,7 @@ public:
 		e1->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
 		e1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
 		e1->AddComponent<RectComp>(0, 255, 0);
+		e1->AddComponent<CubeController>();
 		Entities.push_back(e1);
 		
 		

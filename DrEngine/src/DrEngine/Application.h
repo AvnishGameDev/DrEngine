@@ -1,7 +1,10 @@
 #pragma once
 
+#include <map>
+#include <vector>
+
 #include "Core.h"
-#include "Window.h";
+#include "Window.h"
 
 namespace DrEngine {
 	namespace ECS
@@ -25,7 +28,6 @@ namespace DrEngine {
 
 		static Renderer* renderer;
 		static SDL_Event event;
-		static bool Keys[1024];
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
