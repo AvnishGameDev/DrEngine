@@ -12,6 +12,11 @@ namespace DrEngine::ECS
     {
     public:
 
+        RectComp(bool inPulse)
+        {
+            bPulse = inPulse;
+        }
+        
         RectComp(int inR = 0, int inG = 255, int inB = 255)
         {
             R = inR;
@@ -46,6 +51,13 @@ namespace DrEngine::ECS
 
         void Draw() override
         {
+            if (bPulse)
+            {
+                R = 0;
+                G = SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+                B = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+            }
+            
             SDL_SetRenderDrawColor(Application::renderer->GetSDLRenderer(), R, G, B, 255);
             SDL_RenderFillRect(Application::renderer->GetSDLRenderer(), &rect);
         }
@@ -54,6 +66,8 @@ namespace DrEngine::ECS
         
     private:
 
+        bool bPulse{false};
+        
         int R,G,B;
         
         TransformComponent* transform;
