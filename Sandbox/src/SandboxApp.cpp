@@ -46,7 +46,7 @@ public:
 		Ball->AddComponent<TransformComponent>();
 		Ball->GetComponentByClass<TransformComponent>()->Location = Vector2D(280, 280);
 		Ball->GetComponentByClass<TransformComponent>()->Scale = Vector2D(12, 12);
-		Ball->GetComponentByClass<TransformComponent>()->Velocity = Vector2D(0.2f, -0.1f);
+		Ball->GetComponentByClass<TransformComponent>()->Velocity = Vector2D(0.1f, -0.1f);
 		Ball->AddComponent<RectComp>();
 		Ball->AddComponent<CollisionComponent>();
 		Ball->AddComponent<BallComponent>(paddles);
