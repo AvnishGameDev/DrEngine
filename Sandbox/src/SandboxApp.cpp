@@ -1,6 +1,8 @@
 #include "DrEngine.h"
 #include "SDL.h"
+#include "Components/BallComponent.h"
 #include "Components/CubeController.h"
+#include "Components/PaddleController.h"
 #include "Components/ScaleBlendComp.h"
 #include "Components/TrigMovement.h"
 
@@ -21,22 +23,33 @@ public:
 	virtual void BeginPlay() override
 	{
 		Application::BeginPlay();
-		
-		auto e1 = manager->AddEntity();
-		e1->AddComponent<TransformComponent>();
-		e1->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
-		e1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
-		e1->AddComponent<RectComp>(0, 255, 0);
-		Entities.push_back(e1);
-		
-		
-		auto e2 = manager->AddEntity(PlayerComp);
-		e2->AddComponent<TransformComponent>();
-		e2->GetComponentByClass<TransformComponent>()->Location = Vector2D(150, 100);
-		e2->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
-		e2->AddComponent<RectComp>(0, 0, 255);
-		e2->AddComponent<CubeController>();
-		Entities.push_back(e2);
+
+		auto p1 = manager->AddEntity("paddle1");
+		p1->AddComponent<TransformComponent>();
+		p1->GetComponentByClass<TransformComponent>()->Location = Vector2D(20, 200);
+		p1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(10, 100);
+		p1->AddComponent<RectComp>();
+		p1->AddComponent<CollisionComponent>();
+		p1->AddComponent<PaddleController>();
+		paddles.push_back(p1);
+
+		auto p2 = manager->AddEntity("paddle2");
+		p2->AddComponent<TransformComponent>();
+		p2->GetComponentByClass<TransformComponent>()->Location = Vector2D(760, 200);
+		p2->GetComponentByClass<TransformComponent>()->Scale = Vector2D(10, 100);
+		p2->AddComponent<RectComp>();
+		p2->AddComponent<CollisionComponent>();
+		p2->AddComponent<PaddleController>();
+		paddles.push_back(p2);
+
+		Ball = manager->AddEntity("Ball");
+		Ball->AddComponent<TransformComponent>();
+		Ball->GetComponentByClass<TransformComponent>()->Location = Vector2D(280, 280);
+		Ball->GetComponentByClass<TransformComponent>()->Scale = Vector2D(12, 12);
+		Ball->GetComponentByClass<TransformComponent>()->Velocity = Vector2D(0.2f, -0.1f);
+		Ball->AddComponent<RectComp>();
+		Ball->AddComponent<CollisionComponent>();
+		Ball->AddComponent<BallComponent>(paddles);
 	}
 
 	virtual void Update() override
@@ -52,7 +65,8 @@ public:
 		
 	}
 
-	std::vector<Entity*> Entities;
+	std::vector<Entity*> paddles;
+	Entity* Ball;
 	
 	int i{0};
 };

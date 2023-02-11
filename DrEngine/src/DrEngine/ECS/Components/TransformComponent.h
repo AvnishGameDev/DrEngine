@@ -20,6 +20,11 @@ namespace DrEngine::ECS
             
         }
 
+        void Update() override
+        {
+            Location += Velocity;
+        }
+
         Vector2D GetLocation() const { return Location; };
         Vector2D GetScale() const { return Scale; };
         Vector2D GetVelocity() const { return Velocity; };

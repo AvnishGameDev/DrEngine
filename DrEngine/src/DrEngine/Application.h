@@ -13,6 +13,7 @@ namespace DrEngine {
 	namespace ECS
 	{
 		class Manager;
+		class CollisionComponent;
 	}
 
 	class DRENGINE_API Application
@@ -32,6 +33,7 @@ namespace DrEngine {
 		static Renderer* renderer;
 		static SDL_Event event;
 		static InputManager* inputManager;
+		static std::vector<ECS::CollisionComponent*> Colliders;
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }

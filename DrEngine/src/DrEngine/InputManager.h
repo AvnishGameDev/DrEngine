@@ -40,7 +40,6 @@ namespace DrEngine
                 SDL_GetMouseState(&x, &y);
                 Vector2D CurrentPos{Vector2D(x, y)};
                 MouseDeltaPos = CurrentPos - MousePos;
-                DE_INFO("({0},{1}) - ({2},{3}) = ({4},{5})", CurrentPos.X(), CurrentPos.Y(), MousePos.X(), MousePos.Y(), MouseDeltaPos.X(), MouseDeltaPos.Y());
                 MousePos.SetX(x);
                 MousePos.SetY(y);
             }

@@ -22,3 +22,7 @@
 //----------Input Manager----------
 #include "DrEngine/InputManager.h"
 //---------------------------------
+
+//------------Collision------------
+#include "DrEngine/Collision.h"
+//---------------------------------

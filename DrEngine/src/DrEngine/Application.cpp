@@ -11,6 +11,7 @@ namespace DrEngine {
 	Renderer* Application::renderer = nullptr;
 	SDL_Event Application::event;
 	InputManager* Application::inputManager;
+	std::vector<ECS::CollisionComponent*> Application::Colliders;
 	
 	Application::Application(char* name, int width, int height, bool fullscreen)
 	{
