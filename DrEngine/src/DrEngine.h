@@ -18,3 +18,7 @@
 //-------------Helper--------------
 #include "DrEngine/Utils/Helper.h"
 //---------------------------------
+
+//----------Input Manager----------
+#include "DrEngine/InputManager.h"
+//---------------------------------

@@ -20,12 +20,13 @@ public:
 
 	virtual void BeginPlay() override
 	{
+		Application::BeginPlay();
+		
 		auto e1 = manager->AddEntity();
 		e1->AddComponent<TransformComponent>();
 		e1->GetComponentByClass<TransformComponent>()->Location = Vector2D(100, 100);
 		e1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
 		e1->AddComponent<RectComp>(0, 255, 0);
-		e1->AddComponent<CubeController>();
 		Entities.push_back(e1);
 		
 		
@@ -34,6 +35,7 @@ public:
 		e2->GetComponentByClass<TransformComponent>()->Location = Vector2D(150, 100);
 		e2->GetComponentByClass<TransformComponent>()->Scale = Vector2D(100, 100);
 		e2->AddComponent<RectComp>(0, 0, 255);
+		e2->AddComponent<CubeController>();
 		Entities.push_back(e2);
 	}
 

@@ -7,6 +7,9 @@
 #include "Window.h"
 
 namespace DrEngine {
+
+	class InputManager;
+	
 	namespace ECS
 	{
 		class Manager;
@@ -20,7 +23,7 @@ namespace DrEngine {
 
 		void Run();
 
-		virtual void BeginPlay() = 0;
+		virtual void BeginPlay();
 		
 		virtual void Update();
 
@@ -28,6 +31,7 @@ namespace DrEngine {
 
 		static Renderer* renderer;
 		static SDL_Event event;
+		static InputManager* inputManager;
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }

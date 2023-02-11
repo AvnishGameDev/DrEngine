@@ -4,11 +4,13 @@
 #include "Log.h"
 #include "SDL.h"
 #include "Renderer.h"
+#include "InputManager.h"
 
 namespace DrEngine {
 
 	Renderer* Application::renderer = nullptr;
 	SDL_Event Application::event;
+	InputManager* Application::inputManager;
 	
 	Application::Application(char* name, int width, int height, bool fullscreen)
 	{
@@ -54,6 +56,7 @@ namespace DrEngine {
 			SDL_PumpEvents();
 			while (SDL_PollEvent(&Application::event))
 			{
+				Application::inputManager->PollEvent();
 				if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) || event.type == SDL_QUIT)
 				{
 					SDL_Quit();
@@ -63,11 +66,19 @@ namespace DrEngine {
 			
 			Update();
 			Draw();
+			
+			Application::inputManager->ResetMouseDelta();
 		}
 	}
-	
+
+	void Application::BeginPlay()
+	{
+		inputManager = new InputManager();
+	}
+
 	void Application::Update()
 	{
+		Application::inputManager->Update();
 		manager->Update();
 	}
 

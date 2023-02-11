@@ -38,6 +38,28 @@ namespace DrEngine
             finalVec.SetY(this->Y() + vec2.Y());
             return finalVec;
         }
+
+        Vector2D operator - (const Vector2D& vec2) const
+        {
+            Vector2D finalVec;
+            finalVec.SetX(this->X() - vec2.X());
+            finalVec.SetY(this->Y() - vec2.Y());
+            return finalVec;
+        }
+
+        Vector2D operator += (const Vector2D& vec2)
+        {
+            this->SetX(this->X() + vec2.X());
+            this->SetY(this->Y() + vec2.Y());
+            return *this;
+        }
+
+        Vector2D operator -= (const Vector2D& vec2)
+        {
+            this->SetX(this->X() - vec2.X());
+            this->SetY(this->Y() - vec2.Y());
+            return *this;
+        }
         
     private:
         float x{0};
