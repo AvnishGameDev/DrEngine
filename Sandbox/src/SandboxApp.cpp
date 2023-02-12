@@ -48,12 +48,13 @@ public:
 		Ball = manager->AddEntity("Ball");
 		Ball->AddComponent<TransformComponent>();
 		Ball->GetComponentByClass<TransformComponent>()->Location = Vector2D(280, 280);
-		Ball->GetComponentByClass<TransformComponent>()->Scale = Vector2D(12, 12);
+		Ball->GetComponentByClass<TransformComponent>()->Scale = Vector2D(36, 36);
 		Ball->GetComponentByClass<TransformComponent>()->Velocity = Vector2D(0.28f, -0.28f);
-		Ball->AddComponent<RectComp>(true);
+		Ball->AddComponent<RectComp>(0, 0, 0)->SetVisibility(false);
 		Ball->AddComponent<CollisionComponent>();
 		Ball->AddComponent<BallComponent>(paddles);
 		Ball->AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 28, "Score: 0");
+		Ball->AddComponent<SpriteComponent>("Assets/Images/ball.png");
 
 		FpsCounter = manager->AddEntity("FpsCounter");
 		FpsCounter->AddComponent<FpsComp>();
@@ -65,6 +66,13 @@ public:
 		const auto descText = Desc->AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 14, "Made using DrEngine. Made by AvnishGameDev.");
 		descText->SetLocation(Vector2D(460, 580));
 		descText->SetPulse(true);
+
+		bg = manager->AddEntity("bg");
+		bg->SetBatch(Tile);
+		bg->AddComponent<TransformComponent>()->Scale = Vector2D(800, 600);
+		bg->AddComponent<RectComp>();
+		bg->AddComponent<SpriteComponent>("Assets/Images/bg.png");
+		
 	}
 
 	virtual void Update() override
@@ -96,6 +104,7 @@ public:
 	Entity* Ball;
 	Entity* FpsCounter;
 	Entity* Desc;
+	Entity* bg;
 
 	int currentScore{0};
 	

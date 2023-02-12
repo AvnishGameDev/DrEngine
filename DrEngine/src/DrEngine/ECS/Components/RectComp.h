@@ -57,15 +57,20 @@ namespace DrEngine::ECS
                 G = SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
                 B = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
             }
-            
-            SDL_SetRenderDrawColor(Application::renderer->GetSDLRenderer(), R, G, B, 255);
-            SDL_RenderFillRect(Application::renderer->GetSDLRenderer(), &rect);
+
+            if (bVisible)
+            {
+                SDL_SetRenderDrawColor(Application::renderer->GetSDLRenderer(), R, G, B, 255);
+                SDL_RenderFillRect(Application::renderer->GetSDLRenderer(), &rect);
+            }
         }
 
+        void SetVisibility(bool inVal) { bVisible = inVal; };
         SDL_Rect* GetRect() { return &rect; };
         
     private:
 
+        bool bVisible{true};
         bool bPulse{false};
         
         int R,G,B;

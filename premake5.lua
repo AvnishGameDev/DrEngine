@@ -90,6 +90,8 @@ project "Sandbox"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/Assets/Fonts/Sans.tff",
+        "%{prj.name}/Assets/**"
     }
 
     includedirs

@@ -2,10 +2,12 @@
 
 #include "ECS/ECS.h"
 #include "Log.h"
-#include "SDL.h"
-#include "SDL_ttf.h"
 #include "Renderer.h"
 #include "InputManager.h"
+
+#include "SDL.h"
+#include "SDL_ttf.h"
+#include "SDL_image.h"
 
 namespace DrEngine {
 
@@ -50,6 +52,12 @@ namespace DrEngine {
 		if (TTF_Init() != 0)
 		{
 			DE_CORE_ERROR("TTF_Init Error: {0}", TTF_GetError());
+		}
+
+		/* Image Init */
+		if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
+		{
+			DE_CORE_ERROR("IMG_Init Error: {0}", IMG_GetError());
 		}
 		
 		/* Init Manager */

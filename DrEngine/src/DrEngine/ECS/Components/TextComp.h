@@ -19,6 +19,11 @@ namespace DrEngine::ECS
             SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
         }
 
+        ~TextComp()
+        {
+            SDL_DestroyTexture(textTexture);
+        }
+
         void Draw() override
         {
             if (bPulse)

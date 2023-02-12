@@ -18,4 +18,5 @@
 #include "Components/CircleComp.h"
 #include "Components/CollisionComponent.h"
 #include "Components/TextComp.h"
+#include "Components/SpriteComponent.h"
 
