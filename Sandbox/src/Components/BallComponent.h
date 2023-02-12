@@ -8,7 +8,7 @@ class BallComponent : public Component
 {
 public:
 
-    BallComponent(std::vector<Entity*> inPaddles)
+    BallComponent(std::vector<Entity*>& inPaddles)
     {
         paddles = inPaddles;
     }
@@ -20,24 +20,34 @@ public:
 
     void Update() override
     {
-        for (auto p : paddles)
+        now = SDL_GetTicks();
+        
+        if (now - last > 10)
         {
-            if (Collision::AABB(GetOwner()->GetComponentByClass<CollisionComponent>(), p->GetComponentByClass<CollisionComponent>()))
+            for (auto p : paddles)
+            {
+                if (Collision::AABB(GetOwner()->GetComponentByClass<CollisionComponent>(), p->GetComponentByClass<CollisionComponent>()))
+                {
+                    transform->Velocity.SetX(transform->GetVelocity().X() * -1);
+                    last = now;
+                }
+            }
+
+            if (transform->GetLocation().X() > 800 || transform->GetLocation().X() < 0)
             {
                 transform->Velocity.SetX(transform->GetVelocity().X() * -1);
+                last = now;
             }
-        }
-
-        if (transform->GetLocation().X() > 800 || transform->GetLocation().X() < 0)
-        {
-            transform->Velocity.SetX(transform->GetVelocity().X() * -1);
-        }
-        if (transform->GetLocation().Y() > 580 || transform->GetLocation().Y() < 0)
-        {
-            transform->Velocity.SetY(transform->GetVelocity().Y() * -1);
+            if (transform->GetLocation().Y() > 580 || transform->GetLocation().Y() < 0)
+            {
+                transform->Velocity.SetY(transform->GetVelocity().Y() * -1);
+                last = now;
+            }
         }
     }
 private:
+    Uint32 last, now;
+    
     std::vector<Entity*> paddles;
     TransformComponent* transform;
 };
