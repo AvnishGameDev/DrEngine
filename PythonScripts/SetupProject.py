@@ -252,10 +252,67 @@ def DownloadSDLttf():
 
     print('SDL2_ttf installed Successfully!')
 
+def DownloadSDLimage():
+    response = requests.get("https://api.github.com/repos/libsdl-org/SDL_image/releases/latest")
+    versionNo = response.json()["name"]
+
+    if os.path.exists(f'{os.getcwd()}/../DrEngine/vendor/SDL2_image'):
+        f = open(f'{os.getcwd()}/../DrEngine/vendor/SDL2_image/version.txt')
+        if f.read() == versionNo:
+            print('SDL2_image Up-to date')
+            return
+        else:
+            print('!!!!!!!!!!SDL2_image Outdated. Delete DrEngine/Vendor folder then relaunch the script!!!!!!!!!!!!!!!!!!!')
+            print(f'"{os.getcwd()}/../DrEngine/vendor"')
+            exit()
+
+    print('Downloading SDL2_image')
+
+    print(f"SDL2_image Version: {versionNo}")
+
+    url = f'https://github.com/libsdl-org/SDL_image/releases/download/release-{versionNo}/SDL2_image-devel-{versionNo}-VC.zip'
+    req = requests.get(url)
+
+    filename = url.split('/')[-1]
+
+    with open(filename, 'wb') as output_file:
+        output_file.write(req.content)
+
+    print('Downloaded SDL2_image.')
+
+    print('Starting SDL2_image Extraction')
+
+    with zipfile.ZipFile(BytesIO(req.content)) as zf:
+        for member in tqdm(zf.infolist(), desc='Extracting SDL2_image '):
+            try:
+                zf.extract(member, os.getcwd())
+            except zipfile.error as e:
+                print(f'Error while extracting SDL2_image: {e}')
+                pass
+
+    print('SDL2_image extracted Successfully')
+
+    print('Deleting SDL2_image Residual Files')
+
+    os.remove(f'{os.getcwd()}/{filename}')
+
+    print('Finalizing SDL2_image Setup')
+
+    os.rename(f'SDL2_image-{versionNo}', 'SDL2_image')
+
+    # writing version.txt
+    with open('SDL2_image/version.txt', "w") as f:
+        f.write(versionNo)
+
+    shutil.move(f'{os.getcwd()}/SDL2_image', f'{os.getcwd()}/../DrEngine/vendor/SDL2_image')
+
+    print('SDL2_image installed Successfully!')
+
 DownloadPremake()
 DownloadSPDLOG()
 DownloadSDL()
 DownloadSDLttf()
+DownloadSDLimage()
 
 print('Setup Complete! Run GenerateProjectFiles.bat to generate Visual Studio 2022 Solution.')
 
