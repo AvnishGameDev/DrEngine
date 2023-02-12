@@ -39,7 +39,7 @@ namespace DrEngine {
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
 		
-		ECS::Manager* manager;
+		static ECS::Manager* manager;
 	private:
 		Window* window;
 

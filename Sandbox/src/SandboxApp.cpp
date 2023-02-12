@@ -7,6 +7,7 @@
 #include "Components/TrigMovement.h"
 
 #include "SDL_ttf.h"
+#include "Components/FpsComp.h"
 
 using namespace DrEngine;
 using namespace DrEngine::ECS;
@@ -53,6 +54,17 @@ public:
 		Ball->AddComponent<CollisionComponent>();
 		Ball->AddComponent<BallComponent>(paddles);
 		Ball->AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 28, "Score: 0");
+
+		FpsCounter = manager->AddEntity("FpsCounter");
+		FpsCounter->AddComponent<FpsComp>();
+		const auto fpsText = FpsCounter->AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 18, "FPS: 30");
+		fpsText->SetLocation(Vector2D(720, 10));
+		fpsText->SetColor({255, 255, 255, 255});
+
+		Desc = manager->AddEntity("Desc");
+		const auto descText = Desc->AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 14, "Made using DrEngine. Made by AvnishGameDev.");
+		descText->SetLocation(Vector2D(460, 580));
+		descText->SetPulse(true);
 	}
 
 	virtual void Update() override
@@ -66,6 +78,10 @@ public:
 			std::string text = "Score: " + std::to_string(currentScore);
 			Ball->GetComponentByClass<TextComp>()->SetText(text);
 		}
+
+		float fps = FpsCounter->GetComponentByClass<FpsComp>()->GetFPS();
+		std::string fpsText = "FPS: " + std::to_string(static_cast<int>(fps));
+		FpsCounter->GetComponentByClass<TextComp>()->SetText(fpsText);
 		
 		i++;
 	}
@@ -78,6 +94,8 @@ public:
 
 	std::vector<Entity*> paddles;
 	Entity* Ball;
+	Entity* FpsCounter;
+	Entity* Desc;
 
 	int currentScore{0};
 	

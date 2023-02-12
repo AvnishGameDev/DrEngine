@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DrEngine.h"
+#include "NotificationComp.h"
 
 using namespace DrEngine;
 
@@ -39,6 +40,8 @@ public:
                 transform->Velocity.SetX(transform->GetVelocity().X() * -1);
                 last = now;
                 Score = 0;
+
+                Application::manager->AddEntity()->AddComponent<NotificationComp>("Score Reset!", 1000);
             }
             if (transform->GetLocation().Y() > 580 || transform->GetLocation().Y() < 0)
             {

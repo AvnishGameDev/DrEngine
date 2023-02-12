@@ -15,6 +15,8 @@ namespace DrEngine {
 	std::vector<ECS::CollisionComponent*> Application::Colliders;
 	Uint32 Application::deltaTime = 0.0f;
 
+	ECS::Manager* Application::manager;
+
 	Uint32 lastTickTime = 0;
 	
 	Application::Application(char* name, int width, int height, bool fullscreen)

@@ -21,6 +21,21 @@ namespace DrEngine::ECS
 
         void Draw() override
         {
+            if (bPulse)
+            {
+                int R, G, B;
+                R = 0;
+                G = SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+                B = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+
+                SDL_Color col;
+                col.r = R;
+                col.g = G;
+                col.b = B;
+                col.a = 255;
+                SetColor(col);
+            }
+            
             textRect.x = Location.X();
             textRect.y = Location.Y();
             SDL_RenderCopy(Application::renderer->GetSDLRenderer(), textTexture, nullptr, &textRect);
@@ -76,8 +91,13 @@ namespace DrEngine::ECS
         }
         
         void SetLocation(Vector2D inLoc) { Location = inLoc; }
+
+        void SetPulse(bool inVal) { bPulse = inVal; };
         
     private:
+
+        bool bPulse{false};
+        
         std::string fontPath;
         int fontSize;
         std::string text;
