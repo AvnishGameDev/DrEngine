@@ -13,7 +13,7 @@ Being Developed by AvnishGameDev.
 * **Active Internet connection** to download external dependencies
 
 ## Steps to Setup Project
-1. Clone or Download Zip from GitHub.
+1. Clone or Download the project from GitHub.
 2. Open the Folder.
 3. Run SetupProject.bat\
 ![Screenshot 2023-02-11 194115](https://user-images.githubusercontent.com/64523755/218262571-58718865-3e15-4a6e-926c-a88e9a250ba1.png)
