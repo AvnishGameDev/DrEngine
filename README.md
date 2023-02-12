@@ -33,7 +33,7 @@ Being Developed by AvnishGameDev.
 ![Screenshot 2023-02-11 194142](https://user-images.githubusercontent.com/64523755/218262600-ee008375-d948-48fa-8f47-ef81004ba5e1.png)
 
 11. You should see this in the solution explorer \
-![image](https://user-images.githubusercontent.com/64523755/218262790-d85effa7-2bd8-4600-b82b-6afc4cd0738c.png)
+![image](https://user-images.githubusercontent.com/64523755/218299652-3871d28a-4721-47ad-a90c-83ad6b40ab6a.png)
 
 12. Right click on Sanbox.
 13. Click Set as Startup Project\
