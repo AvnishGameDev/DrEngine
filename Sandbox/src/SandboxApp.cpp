@@ -6,6 +6,8 @@
 #include "Components/ScaleBlendComp.h"
 #include "Components/TrigMovement.h"
 
+#include "SDL_ttf.h"
+
 using namespace DrEngine;
 using namespace DrEngine::ECS;
 
@@ -50,11 +52,20 @@ public:
 		Ball->AddComponent<RectComp>(true);
 		Ball->AddComponent<CollisionComponent>();
 		Ball->AddComponent<BallComponent>(paddles);
+		Ball->AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 28, "Score: 0");
 	}
 
 	virtual void Update() override
 	{
 		Application::Update();
+
+		int ballScore =  Ball->GetComponentByClass<BallComponent>()->GetScore();
+		if (currentScore != ballScore)
+		{
+			currentScore = ballScore;
+			std::string text = "Score: " + std::to_string(currentScore);
+			Ball->GetComponentByClass<TextComp>()->SetText(text);
+		}
 		
 		i++;
 	}
@@ -67,6 +78,8 @@ public:
 
 	std::vector<Entity*> paddles;
 	Entity* Ball;
+
+	int currentScore{0};
 	
 	int i{0};
 };

@@ -3,6 +3,7 @@
 #include "ECS/ECS.h"
 #include "Log.h"
 #include "SDL.h"
+#include "SDL_ttf.h"
 #include "Renderer.h"
 #include "InputManager.h"
 
@@ -43,6 +44,12 @@ namespace DrEngine {
 		/* Attaching Renderer to Window */
 		window->SetRenderer(renderer);
 
+		/* TTF Init */
+		if (TTF_Init() != 0)
+		{
+			DE_CORE_ERROR("TTF_Init Error: {0}", TTF_GetError());
+		}
+		
 		/* Init Manager */
 		manager = new ECS::Manager();
 	}

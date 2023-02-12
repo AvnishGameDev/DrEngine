@@ -22,7 +22,7 @@ public:
     {
         now = SDL_GetTicks();
         
-        if (now - last > 10)
+        if (now - last > 20)
         {
             for (auto p : paddles)
             {
@@ -30,6 +30,7 @@ public:
                 {
                     transform->Velocity.SetX(transform->GetVelocity().X() * -1);
                     last = now;
+                    Score++;
                 }
             }
 
@@ -37,6 +38,7 @@ public:
             {
                 transform->Velocity.SetX(transform->GetVelocity().X() * -1);
                 last = now;
+                Score = 0;
             }
             if (transform->GetLocation().Y() > 580 || transform->GetLocation().Y() < 0)
             {
@@ -45,7 +47,11 @@ public:
             }
         }
     }
+
+    int GetScore() const { return Score; };
 private:
+    int Score{0};
+    
     Uint32 last, now;
     
     std::vector<Entity*> paddles;
