@@ -22,7 +22,7 @@ namespace DrEngine::ECS
 
         void Update() override
         {
-            Location += Velocity;
+            Location += Velocity * Application::deltaTime;
         }
 
         Vector2D GetLocation() const { return Location; };

@@ -34,6 +34,7 @@ namespace DrEngine {
 		static SDL_Event event;
 		static InputManager* inputManager;
 		static std::vector<ECS::CollisionComponent*> Colliders;
+		static Uint32 deltaTime;
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }

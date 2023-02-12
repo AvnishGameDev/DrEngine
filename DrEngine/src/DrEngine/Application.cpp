@@ -12,6 +12,9 @@ namespace DrEngine {
 	SDL_Event Application::event;
 	InputManager* Application::inputManager;
 	std::vector<ECS::CollisionComponent*> Application::Colliders;
+	Uint32 Application::deltaTime = 0.0f;
+
+	Uint32 lastTickTime = 0;
 	
 	Application::Application(char* name, int width, int height, bool fullscreen)
 	{
@@ -54,6 +57,10 @@ namespace DrEngine {
 		BeginPlay();
 		while (true)
 		{
+			uint32_t tick_time = SDL_GetTicks();
+			deltaTime = tick_time - lastTickTime;
+			lastTickTime = tick_time;
+			
 			SDL_PumpEvents();
 			while (SDL_PollEvent(&Application::event))
 			{
