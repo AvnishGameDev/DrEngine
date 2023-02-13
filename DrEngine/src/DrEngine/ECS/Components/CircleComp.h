@@ -28,10 +28,10 @@ namespace DrEngine::ECS
         void Draw(float deltaTime) override
         {
             int X, Y;
-            X = transform->GetLocation().X();
-            Y = transform->GetLocation().Y();
+            X = static_cast<int>(transform->GetLocation().X());
+            Y = static_cast<int>(transform->GetLocation().Y());
         
-            DrawCircle(Application::renderer->GetSDLRenderer(), X, Y, transform->GetScale().X());
+            DrawCircle(Application::renderer->GetSDLRenderer(), X, Y, static_cast<int32_t>(transform->GetScale().X()));
         }
     
     private:

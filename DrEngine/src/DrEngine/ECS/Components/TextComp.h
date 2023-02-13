@@ -30,8 +30,8 @@ namespace DrEngine::ECS
             {
                 int R, G, B;
                 R = 0;
-                G = SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
-                B = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+                G = static_cast<int>(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
+                B = static_cast<int>(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
 
                 SDL_Color col;
                 col.r = R;
@@ -41,8 +41,8 @@ namespace DrEngine::ECS
                 SetColor(col);
             }
             
-            textRect.x = Location.X();
-            textRect.y = Location.Y();
+            textRect.x = static_cast<int>(Location.X());
+            textRect.y = static_cast<int>(Location.Y());
             SDL_RenderCopy(Application::renderer->GetSDLRenderer(), textTexture, nullptr, &textRect);
         }
 

@@ -42,10 +42,10 @@ namespace DrEngine::ECS
         {
             if (transform)
             {
-                rect.x = transform->GetLocation().X();
-                rect.y = transform->GetLocation().Y();
-                rect.w = transform->GetScale().X();
-                rect.h = transform->GetScale().Y();
+                rect.x = static_cast<int>(transform->GetLocation().X());
+                rect.y = static_cast<int>(transform->GetLocation().Y());
+                rect.w = static_cast<int>(transform->GetScale().X());
+                rect.h = static_cast<int>(transform->GetScale().Y());
             }
         }
 
@@ -54,8 +54,8 @@ namespace DrEngine::ECS
             if (bPulse)
             {
                 R = 0;
-                G = SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
-                B = SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f);
+                G = static_cast<int>(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
+                B = static_cast<int>(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
             }
 
             if (bVisible)

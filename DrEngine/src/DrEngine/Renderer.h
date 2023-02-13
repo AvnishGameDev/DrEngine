@@ -6,7 +6,7 @@ namespace DrEngine
 {
     class Window;
 }
-class SDL_Renderer;
+struct SDL_Renderer;
 
 namespace DrEngine
 {

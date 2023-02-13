@@ -38,10 +38,10 @@ namespace DrEngine
             {
                 int x, y;
                 SDL_GetMouseState(&x, &y);
-                Vector2D CurrentPos{Vector2D(x, y)};
+                const Vector2D CurrentPos{Vector2D(static_cast<float>(x), static_cast<float>(y))};
                 MouseDeltaPos = CurrentPos - MousePos;
-                MousePos.SetX(x);
-                MousePos.SetY(y);
+                MousePos.SetX(static_cast<float>(x));
+                MousePos.SetY(static_cast<float>(y));
             }
             else
             {
@@ -94,6 +94,7 @@ namespace DrEngine
                 return mouseRightDown;
                 break;
             }
+            return false;
         }
 
         Vector2D GetMousePos() const { return MousePos; };

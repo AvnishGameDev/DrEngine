@@ -44,10 +44,10 @@ namespace DrEngine::ECS
         void Draw(float deltaTime) override
         {
             SDL_Rect rect;
-            rect.x = transform->GetLocation().X();
-            rect.y = transform->GetLocation().Y();
-            rect.w = transform->GetScale().X();
-            rect.h = transform->GetScale().Y();
+            rect.x = static_cast<int>(transform->GetLocation().X());
+            rect.y = static_cast<int>(transform->GetLocation().Y());
+            rect.w = static_cast<int>(transform->GetScale().X());
+            rect.h = static_cast<int>(transform->GetScale().Y());
             
             if (texture)
             {
