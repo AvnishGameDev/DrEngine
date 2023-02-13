@@ -75,7 +75,7 @@ public:
 		bg->SetBatch(Tile);
 		bg->AddComponent<TransformComponent>()->Scale = Vector2D(800, 600);
 		bg->AddComponent<RectComp>();
-		bg->AddComponent<SpriteComponent>("Assets/Images/bg.png");
+		bg->AddComponent<SpriteComponent>("Assets/Images/bg-updated.jpg");
 		
 	}
 

@@ -38,9 +38,11 @@ namespace DrEngine {
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
 
+		static Uint32 GetMilliseconds() { return Milliseconds; };
 		static SDL_Event& GetEvent() { return event; };
 		static float GetDeltaTime() { return DeltaTime; };
 	private:
+		static Uint32 Milliseconds;
 		static SDL_Event event;
 		static float DeltaTime;
 		

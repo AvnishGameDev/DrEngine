@@ -16,6 +16,7 @@ namespace DrEngine {
 	InputManager* Application::inputManager;
 	std::vector<ECS::CollisionComponent*> Application::Colliders;
 	float Application::DeltaTime = 0.0f;
+	Uint32 Application::Milliseconds = 0;
 
 	ECS::Manager* Application::manager;
 
@@ -56,7 +57,8 @@ namespace DrEngine {
 		}
 
 		/* Image Init */
-		if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
+		constexpr int flags = IMG_INIT_PNG | IMG_INIT_JPG;
+		if (IMG_Init(flags) != flags)
 		{
 			DE_CORE_ERROR("IMG_Init Error: {0}", IMG_GetError());
 		}
@@ -75,6 +77,8 @@ namespace DrEngine {
 		BeginPlay();
 		while (true)
 		{
+			Milliseconds = SDL_GetTicks();
+			
 			LAST = NOW;
 			NOW = SDL_GetPerformanceCounter();
 
