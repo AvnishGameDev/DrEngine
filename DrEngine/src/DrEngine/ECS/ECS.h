@@ -6,6 +6,7 @@
 #include "../Core.h"
 #include "../Application.h"
 #include "../Renderer.h"
+#include "../Structs.h"
 
 #include "ECS_Utils.h"
 

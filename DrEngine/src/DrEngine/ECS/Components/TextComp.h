@@ -8,20 +8,19 @@ namespace DrEngine::ECS
     class DRENGINE_API TextComp : public Component
     {
     public:
-        TextComp(const std::string& font_path, int font_size, const std::string& message, const SDL_Color& color = {0, 0, 255, 255})
+        TextComp(const std::string& font_path, int font_size, const std::string& message, const Color& color = Color(0, 0, 255))
         {
             fontPath = font_path;
             fontSize = font_size;
             text = message;
             textColor = color;
-            
-            textTexture = loadFont(font_path, font_size, message, color);
-            SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
+
+            RefreshTexture();
         }
 
         ~TextComp()
         {
-            SDL_DestroyTexture(textTexture);
+            textTexture->Destroy();
         }
 
         void Draw(float deltaTime) override
@@ -32,67 +31,29 @@ namespace DrEngine::ECS
                 R = 0;
                 G = static_cast<int>(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
                 B = static_cast<int>(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
-
-                SDL_Color col;
-                col.r = R;
-                col.g = G;
-                col.b = B;
-                col.a = 255;
-                SetColor(col);
+                
+                SetColor(Color(R, G, B));
             }
             
-            textRect.x = static_cast<int>(Location.X());
-            textRect.y = static_cast<int>(Location.Y());
-            SDL_RenderCopy(Application::renderer->GetSDLRenderer(), textTexture, nullptr, &textRect);
-        }
-
-        static SDL_Texture* loadFont(const std::string& font_path, int font_size, const std::string& message, const SDL_Color& color)
-        {
-            TTF_Font* font = TTF_OpenFont(font_path.c_str(), font_size);
-            if (!font)
-            {
-                DE_ERROR("Failed to load font.");
-                return nullptr;
-            }
-            auto textSurface = TTF_RenderText_Solid(font, message.c_str(), color);
-            if (!textSurface)
-            {
-                DE_ERROR("Failed to create textSurface");
-                return nullptr;
-            }
-            SDL_Texture* texture = SDL_CreateTextureFromSurface(Application::renderer->GetSDLRenderer(), textSurface);
-            if (!texture)
-            {
-                DE_ERROR("Failed to create text Texture.");
-                return nullptr;
-            }
-
-            SDL_FreeSurface(textSurface);
-            return texture;
+            Application::GetRenderer()->RenderTexture(Location, Scale, textTexture);
         }
 
         void SetSize(int newSize)
         {
             fontSize = newSize;
-            SDL_DestroyTexture(textTexture);
-            textTexture = loadFont(fontPath, fontSize, text, textColor);
-            SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
+            RefreshTexture();
         }
         
         void SetText(const std::string& newText)
         {
             text = newText;
-            SDL_DestroyTexture(textTexture);
-            textTexture = loadFont(fontPath, fontSize, text, textColor);
-            SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
+            RefreshTexture();
         }
         
-        void SetColor(const SDL_Color& color)
+        void SetColor(const Color& color)
         {
             textColor = color;
-            SDL_DestroyTexture(textTexture);
-            textTexture = loadFont(fontPath, fontSize, text, color);
-            SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
+            RefreshTexture();
         }
         
         void SetLocation(Vector2D inLoc) { Location = inLoc; }
@@ -101,15 +62,25 @@ namespace DrEngine::ECS
         
     private:
 
+        void RefreshTexture()
+        {
+            if (textTexture)
+                textTexture->Destroy();
+            textTexture = new Texture(fontPath, fontSize, text, textColor);
+            int w, h;
+            SDL_QueryTexture(textTexture->GetSDLTexture(), nullptr, nullptr, &w, &h);
+            Scale = Vector2D(w, h);
+        }
+        
         bool bPulse{false};
         
         std::string fontPath;
         int fontSize;
         std::string text;
-        SDL_Color textColor;
+        Color textColor;
         
         Vector2D Location{Vector2D(20, 20)};
-        SDL_Texture* textTexture{nullptr};
-        SDL_Rect textRect;
+        Vector2D Scale{Vector2D::Zero()};
+        Texture* textTexture{nullptr};
     };
 }

@@ -38,17 +38,6 @@ namespace DrEngine::ECS
             }
         }
 
-        void Update(float deltaTime) override
-        {
-            if (transform)
-            {
-                rect.x = static_cast<int>(transform->GetLocation().X());
-                rect.y = static_cast<int>(transform->GetLocation().Y());
-                rect.w = static_cast<int>(transform->GetScale().X());
-                rect.h = static_cast<int>(transform->GetScale().Y());
-            }
-        }
-
         void Draw(float deltaTime) override
         {
             if (bPulse)
@@ -60,13 +49,11 @@ namespace DrEngine::ECS
 
             if (bVisible)
             {
-                SDL_SetRenderDrawColor(Application::renderer->GetSDLRenderer(), R, G, B, 255);
-                SDL_RenderFillRect(Application::renderer->GetSDLRenderer(), &rect);
+                Application::GetRenderer()->RenderRect(transform->GetLocation(), transform->GetScale(), Color(R, G, B));
             }
         }
 
         void SetVisibility(bool inVal) { bVisible = inVal; };
-        SDL_Rect* GetRect() { return &rect; };
         
     private:
 
@@ -76,7 +63,5 @@ namespace DrEngine::ECS
         int R,G,B;
         
         TransformComponent* transform;
-
-        SDL_Rect rect;
     };
 }

@@ -29,8 +29,7 @@ namespace DrEngine {
 		virtual void Update(float deltaTime);
 
 		virtual void Draw(float deltaTime);
-
-		static Renderer* renderer;
+		
 		static InputManager* inputManager;
 		static std::vector<ECS::CollisionComponent*> Colliders;
 		static ECS::Manager* manager;
@@ -41,10 +40,12 @@ namespace DrEngine {
 		static Uint32 GetMilliseconds() { return Milliseconds; };
 		static SDL_Event& GetEvent() { return event; };
 		static float GetDeltaTime() { return DeltaTime; };
+		static Renderer* GetRenderer() { return renderer; };
 	private:
 		static Uint32 Milliseconds;
 		static SDL_Event event;
 		static float DeltaTime;
+		static Renderer* renderer;
 		
 		Window* window;
 
