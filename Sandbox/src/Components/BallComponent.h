@@ -21,9 +21,9 @@ public:
 
     void Update(float deltaTime) override
     {
-        now = SDL_GetTicks();
+        now = Application::GetMilliseconds();
         
-        if (now - last > 20)
+        if (now - last > 100)
         {
             for (auto p : paddles)
             {

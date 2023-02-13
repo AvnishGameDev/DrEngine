@@ -42,16 +42,16 @@ public:
         switch (trigFunc)
         {
         case Sin:
-            posX = 700.0f  / 2.0f + SDL_sinf(SDL_GetTicks() / 1000.0f * 3.18378f) * (700.0f / 2.0f);
-            posY = 500.0f / 2.0f + SDL_sinf(SDL_GetTicks() / 1000.0f) * (500.0f / 2.0f);
+            posX = 700.0f  / 2.0f + Math::SinF(SDL_GetTicks() / 1000.0f * 3.18378f) * (700.0f / 2.0f);
+            posY = 500.0f / 2.0f + Math::SinF(SDL_GetTicks() / 1000.0f) * (500.0f / 2.0f);
             break;
         case Cos:
-            posX = 700.0f  / 2.0f + SDL_cosf(SDL_GetTicks() / 1000.0f * 3.18378f) * (700.0f / 2.0f);
-            posY = 500.0f / 2.0f + SDL_cosf(SDL_GetTicks() / 1000.0f) * (500.0f / 2.0f);
+            posX = 700.0f  / 2.0f + Math::CosF(SDL_GetTicks() / 1000.0f * 3.18378f) * (700.0f / 2.0f);
+            posY = 500.0f / 2.0f + Math::CosF(SDL_GetTicks() / 1000.0f) * (500.0f / 2.0f);
             break;
         case Tan:
-            posX = 700.0f  / 2.0f + SDL_tanf(SDL_GetTicks() / 1000.0f * 3.18378f) * (700.0f / 2.0f);
-            posY = 500.0f / 2.0f + SDL_tanf(SDL_GetTicks() / 1000.0f) * (500.0f / 2.0f);
+            posX = 700.0f  / 2.0f + Math::TanF(SDL_GetTicks() / 1000.0f * 3.18378f) * (700.0f / 2.0f);
+            posY = 500.0f / 2.0f + Math::TanF(SDL_GetTicks() / 1000.0f) * (500.0f / 2.0f);
             break;
         }
 

@@ -18,12 +18,12 @@ public:
     {
         const auto textComp = GetOwner()->AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 28, message);
         textComp->SetLocation(Location);
-        StartTime = SDL_GetTicks();
+        StartTime = Application::GetMilliseconds();
     }
     
     void Update(float deltaTime) override
     {
-        if (SDL_GetTicks() - StartTime > duration)
+        if (Application::GetMilliseconds() - StartTime > duration)
         {
             Entity* owner = GetOwner();
             Application::manager->DestroyEntity(owner);
