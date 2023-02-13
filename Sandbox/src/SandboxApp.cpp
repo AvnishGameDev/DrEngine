@@ -1,4 +1,8 @@
+#pragma warning (push)
+#pragma warning (disable: 4251)
 #include "DrEngine.h"
+#pragma warning (pop)
+
 #include "SDL.h"
 #include "Components/BallComponent.h"
 #include "Components/CubeController.h"

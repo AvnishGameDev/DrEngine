@@ -18,7 +18,7 @@ public:
         Uint32 elapsedMS = SDL_GetTicks() - startTime; // Time since start of loop
         if (elapsedMS) { // Skip this the first frame
             double elapsedSeconds = elapsedMS / 1000.0; // Convert to seconds
-            fps = numFrames / elapsedSeconds; // FPS is Frames / Seconds
+            fps = static_cast<float>(numFrames / elapsedSeconds); // FPS is Frames / Seconds
         }
     }
 
