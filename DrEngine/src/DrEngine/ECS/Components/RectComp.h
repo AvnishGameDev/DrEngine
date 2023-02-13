@@ -38,7 +38,7 @@ namespace DrEngine::ECS
             }
         }
 
-        void Update() override
+        void Update(float deltaTime) override
         {
             if (transform)
             {
@@ -49,7 +49,7 @@ namespace DrEngine::ECS
             }
         }
 
-        void Draw() override
+        void Draw(float deltaTime) override
         {
             if (bPulse)
             {

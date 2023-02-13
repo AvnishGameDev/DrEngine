@@ -35,7 +35,7 @@ public:
         }
     }
 
-    void Update() override
+    void Update(float deltaTime) override
     {
         float posX, posY;
         

@@ -13,7 +13,7 @@ public:
         
     }
 
-    void Update() override
+    void Update(float deltaTime) override
     {
         Vector2D Loc = GetOwner()->GetComponentByClass<TransformComponent>()->Location;
         

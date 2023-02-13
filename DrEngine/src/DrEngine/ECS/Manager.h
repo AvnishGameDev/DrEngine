@@ -36,16 +36,16 @@ namespace DrEngine::ECS
             }
         }
         
-        void Update()
+        void Update(float deltaTime)
         {
             for (auto e : Entities)
             {
                 if (e)
-                    e->Update();
+                    e->Update(deltaTime);
             }
         }
 
-        void Draw()
+        void Draw(float deltaTime)
         {
             std::vector<Entity*> TileEntities;
             std::vector<Entity*> PropEntities;
@@ -74,19 +74,19 @@ namespace DrEngine::ECS
 
             for (auto e : TileEntities)
             {
-                e->Draw();
+                e->Draw(deltaTime);
             }
             for (auto e : PropEntities)
             {
-                e->Draw();
+                e->Draw(deltaTime);
             }
             for (auto e : PlayerEntities)
             {
-                e->Draw();
+                e->Draw(deltaTime);
             }
             for (auto e : PlayerCompEntities)
             {
-                e->Draw();
+                e->Draw(deltaTime);
             }
         }
         

@@ -75,9 +75,9 @@ public:
 		
 	}
 
-	virtual void Update() override
+	virtual void Update(float deltaTime) override
 	{
-		Application::Update();
+		Application::Update(deltaTime);
 
 		int ballScore =  Ball->GetComponentByClass<BallComponent>()->GetScore();
 		if (currentScore != ballScore)
@@ -94,9 +94,9 @@ public:
 		i++;
 	}
 
-	virtual void Draw() override
+	virtual void Draw(float deltaTime) override
 	{
-		Application::Draw();
+		Application::Draw(deltaTime);
 		
 	}
 

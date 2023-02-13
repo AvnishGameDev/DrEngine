@@ -29,7 +29,7 @@ public:
         }
     }
 
-    void Update() override
+    void Update(float deltaTime) override
     {
         Vector2D Scale;
         Scale.SetX(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * MaxSize.X()));

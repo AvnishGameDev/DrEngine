@@ -40,21 +40,21 @@ namespace DrEngine::ECS
             
         }
 
-        void Update()
+        void Update(float deltaTime)
         {
             for (auto c : Components)
             {
                 if (c)
-                    c->Update();
+                    c->Update(deltaTime);
             }
         }
 
-        void Draw()
+        void Draw(float deltaTime)
         {
             for (auto c : Components)
             {
                 if (c)
-                    c->Draw();
+                    c->Draw(deltaTime);
             }
         }
         

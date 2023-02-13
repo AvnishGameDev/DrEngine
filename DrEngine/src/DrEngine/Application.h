@@ -26,21 +26,24 @@ namespace DrEngine {
 
 		virtual void BeginPlay();
 		
-		virtual void Update();
+		virtual void Update(float deltaTime);
 
-		virtual void Draw();
+		virtual void Draw(float deltaTime);
 
 		static Renderer* renderer;
-		static SDL_Event event;
 		static InputManager* inputManager;
 		static std::vector<ECS::CollisionComponent*> Colliders;
-		static Uint32 deltaTime;
+		static ECS::Manager* manager;
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
-		
-		static ECS::Manager* manager;
+
+		static SDL_Event& GetEvent() { return event; };
+		static float GetDeltaTime() { return DeltaTime; };
 	private:
+		static SDL_Event event;
+		static float DeltaTime;
+		
 		Window* window;
 
 		char* AppName = "App";

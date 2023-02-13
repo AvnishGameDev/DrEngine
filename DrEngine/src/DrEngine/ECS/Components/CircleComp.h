@@ -25,7 +25,7 @@ namespace DrEngine::ECS
             }
         }
     
-        void Draw() override
+        void Draw(float deltaTime) override
         {
             int X, Y;
             X = transform->GetLocation().X();

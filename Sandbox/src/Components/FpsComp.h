@@ -12,7 +12,7 @@ public:
         
     }
 
-    void Update() override
+    void Update(float deltaTime) override
     {
         ++numFrames;
         Uint32 elapsedMS = SDL_GetTicks() - startTime; // Time since start of loop

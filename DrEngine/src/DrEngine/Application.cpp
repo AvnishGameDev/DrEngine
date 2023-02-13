@@ -15,11 +15,12 @@ namespace DrEngine {
 	SDL_Event Application::event;
 	InputManager* Application::inputManager;
 	std::vector<ECS::CollisionComponent*> Application::Colliders;
-	Uint32 Application::deltaTime = 0.0f;
+	float Application::DeltaTime = 0.0f;
 
 	ECS::Manager* Application::manager;
 
-	Uint32 lastTickTime = 0;
+	Uint64 NOW = SDL_GetPerformanceCounter();
+	Uint64 LAST = 0;
 	
 	Application::Application(char* name, int width, int height, bool fullscreen)
 	{
@@ -74,9 +75,10 @@ namespace DrEngine {
 		BeginPlay();
 		while (true)
 		{
-			uint32_t tick_time = SDL_GetTicks();
-			deltaTime = tick_time - lastTickTime;
-			lastTickTime = tick_time;
+			LAST = NOW;
+			NOW = SDL_GetPerformanceCounter();
+
+			DeltaTime = (NOW - LAST)*1000 / (float)SDL_GetPerformanceFrequency();
 			
 			SDL_PumpEvents();
 			while (SDL_PollEvent(&Application::event))
@@ -89,8 +91,8 @@ namespace DrEngine {
 				}
 			}
 			
-			Update();
-			Draw();
+			Update(DeltaTime);
+			Draw(DeltaTime);
 			
 			Application::inputManager->ResetMouseDelta();
 		}
@@ -101,17 +103,17 @@ namespace DrEngine {
 		inputManager = new InputManager();
 	}
 
-	void Application::Update()
+	void Application::Update(float deltaTime)
 	{
 		Application::inputManager->Update();
-		manager->Update();
+		manager->Update(deltaTime);
 	}
 
-	void Application::Draw()
+	void Application::Draw(float deltaTime)
 	{
 		SDL_RenderClear(Application::renderer->GetSDLRenderer());
 		
-		manager->Draw(); // Calls Draw() on all Entities and Components
+		manager->Draw(deltaTime); // Calls Draw() on all Entities and Components
 		
 		SDL_SetRenderDrawColor(Application::renderer->GetSDLRenderer(), 0, 0, 0, 255);	// Let components draw color without worrying to set the colour back to default (black) before
 		SDL_RenderPresent(Application::renderer->GetSDLRenderer());								// rendering next frame, if color not set to default then whole screen will be colored the RenderDrawColor.

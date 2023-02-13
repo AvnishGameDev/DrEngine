@@ -21,7 +21,7 @@ public:
         StartTime = SDL_GetTicks();
     }
     
-    void Update() override
+    void Update(float deltaTime) override
     {
         if (SDL_GetTicks() - StartTime > duration)
         {

@@ -24,7 +24,7 @@ namespace DrEngine::ECS
             SDL_DestroyTexture(textTexture);
         }
 
-        void Draw() override
+        void Draw(float deltaTime) override
         {
             if (bPulse)
             {

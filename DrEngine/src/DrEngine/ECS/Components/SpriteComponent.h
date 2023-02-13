@@ -41,7 +41,7 @@ namespace DrEngine::ECS
             }
         }
 
-        void Draw() override
+        void Draw(float deltaTime) override
         {
             SDL_Rect rect;
             rect.x = transform->GetLocation().X();

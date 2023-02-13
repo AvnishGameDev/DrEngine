@@ -20,9 +20,9 @@ namespace DrEngine::ECS
             
         }
 
-        void Update() override
+        void Update(float deltaTime) override
         {
-            Location += Velocity * Application::deltaTime;
+            Location += Velocity * deltaTime;
         }
 
         Vector2D GetLocation() const { return Location; };

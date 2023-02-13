@@ -12,7 +12,7 @@ public:
         transform = GetOwner()->GetComponentByClass<TransformComponent>();
     }
     
-    void Update() override
+    void Update(float deltaTime) override
     {
         transform->Location = Vector2D(transform->GetLocation().X(), Application::inputManager->GetMousePos().Y());
     }

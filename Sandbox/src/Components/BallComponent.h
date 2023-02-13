@@ -19,7 +19,7 @@ public:
         transform = GetOwner()->GetComponentByClass<TransformComponent>();
     }
 
-    void Update() override
+    void Update(float deltaTime) override
     {
         now = SDL_GetTicks();
         
