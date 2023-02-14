@@ -125,6 +125,12 @@ project "Sandbox"
         "SDL2_mixer.lib"
     }
 
+    postbuildcommands
+    {
+        ("{MKDIR} ../" .. outputdir .. "/Sandbox/Assets"),
+        ("{COPY} Assets ../bin/".. outputdir .. "/Sandbox/Assets")
+    }
+
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
