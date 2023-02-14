@@ -27,12 +27,12 @@ namespace DrEngine
     void Renderer::RenderRect(const Vector2D& Location, const Vector2D& Scale, const Color& color)
     {
         SDL_Rect* rect = new SDL_Rect();
-        rect->x = Location.X();
-        rect->y = Location.Y();
-        rect->w = Scale.X();
-        rect->h = Scale.Y();
+        rect->x = static_cast<int>(Location.X());
+        rect->y = static_cast<int>(Location.Y());
+        rect->w = static_cast<int>(Scale.X());
+        rect->h = static_cast<int>(Scale.Y());
         
-        SDL_SetRenderDrawColor(SDLrenderer, color.GetR(), color.GetG(), color.GetB(), color.GetA());
+        SDL_SetRenderDrawColor(SDLrenderer, static_cast<Uint8>(color.GetR()), static_cast<Uint8>(color.GetG()), static_cast<Uint8>(color.GetB()), static_cast<Uint8>(color.GetA()));
         SDL_RenderFillRect(SDLrenderer, rect);
 
         delete rect;
@@ -60,6 +60,6 @@ namespace DrEngine
 
     void Renderer::RenderPoint(const Vector2D& Location)
     {
-        SDL_RenderDrawPoint(SDLrenderer, Location.X(), Location.Y());
+        SDL_RenderDrawPoint(SDLrenderer, static_cast<int>(Location.X()), static_cast<int>(Location.Y()));
     }
 }
