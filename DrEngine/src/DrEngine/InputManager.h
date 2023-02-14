@@ -27,6 +27,11 @@ namespace DrEngine
             
         }
 
+        void Init()
+        {
+            
+        }
+        
         void Update()
         {
             KeyboardState = SDL_GetKeyboardState(nullptr);

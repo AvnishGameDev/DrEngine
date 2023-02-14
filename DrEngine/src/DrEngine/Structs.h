@@ -3,6 +3,7 @@
 #include <string>
 
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <SDL_render.h>
 #include <SDL_ttf.h>
 
@@ -136,5 +137,26 @@ namespace DrEngine
         
         bool bHit = true;
         ECS::Entity* OtherEntity;
+    };
+
+    struct Audio
+    {
+        Audio(const std::string& inFilePath)
+        {
+            filePath = inFilePath;
+            music = Mix_LoadMUS(filePath.c_str());
+            if (!music)
+            {
+                DE_ERROR("Failed to load music: {0}", Mix_GetError());
+            }
+        }
+        
+        Mix_Music* GetSDLMusic() const { return music; };
+
+        bool IsValid() const { return music != nullptr; };
+        
+    private:
+        std::string filePath;
+        Mix_Music* music;
     };
 }

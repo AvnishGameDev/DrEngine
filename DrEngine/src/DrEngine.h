@@ -23,6 +23,10 @@
 #include "DrEngine/InputManager.h"
 //---------------------------------
 
+//----------Audio Manager----------
+#include "DrEngine/AudioManager.h"
+//---------------------------------
+
 //------------Collision------------
 #include "DrEngine/Collision.h"
 //---------------------------------

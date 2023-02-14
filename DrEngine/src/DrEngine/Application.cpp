@@ -4,18 +4,21 @@
 #include "Log.h"
 #include "Renderer.h"
 #include "InputManager.h"
+#include "AudioManager.h"
 
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include "SDL_image.h"
+#include "SDL_mixer.h"
 
 namespace DrEngine {
 
 	Renderer* Application::renderer = nullptr;
 	SDL_Event Application::event;
-	InputManager* Application::inputManager;
 	float Application::DeltaTime = 0.0f;
 	Uint32 Application::Milliseconds = 0;
+	InputManager* Application::inputManager;
+	AudioManager* Application::audioManager;
 
 	ECS::Manager* Application::manager;
 
@@ -56,10 +59,17 @@ namespace DrEngine {
 		}
 
 		/* Image Init */
-		constexpr int flags = IMG_INIT_PNG | IMG_INIT_JPG;
-		if (IMG_Init(flags) != flags)
+		constexpr int ImgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+		if (IMG_Init(ImgFlags) != ImgFlags)
 		{
 			DE_CORE_ERROR("IMG_Init Error: {0}", IMG_GetError());
+		}
+
+		/* Mixer Init */
+		constexpr int MixerFlags = 0 | MIX_INIT_MP3;
+		if (Mix_Init(MixerFlags) != MixerFlags)
+		{
+			DE_CORE_ERROR("Mix_Init Error: {0}", Mix_GetError());
 		}
 		
 		/* Init Manager */
@@ -104,6 +114,9 @@ namespace DrEngine {
 	void Application::BeginPlay()
 	{
 		inputManager = new InputManager();
+		inputManager->Init();
+		audioManager = new AudioManager();
+		audioManager->Init();
 	}
 
 	void Application::Update(float deltaTime)
