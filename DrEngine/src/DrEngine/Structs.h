@@ -43,10 +43,10 @@ namespace DrEngine
         SDL_Color ToSDLColor() const
         {
             SDL_Color color;
-            color.r = R;
-            color.g = G;
-            color.b = B;
-            color.a = A;
+            color.r = static_cast<Uint8>(R);
+            color.g = static_cast<Uint8>(G);
+            color.b = static_cast<Uint8>(B);
+            color.a = static_cast<Uint8>(A);
             return color;
         }
         

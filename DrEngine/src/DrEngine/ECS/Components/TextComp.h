@@ -27,12 +27,12 @@ namespace DrEngine::ECS
         {
             if (bPulse)
             {
-                int R, G, B;
-                R = 0;
-                G = static_cast<int>(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
-                B = static_cast<int>(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
+                Color color;
+                color.SetR(0);
+                color.SetG(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
+                color.SetB(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
                 
-                SetColor(Color(R, G, B));
+                SetColor(color);
             }
             
             Application::GetRenderer()->RenderTexture(Location, Scale, textTexture);

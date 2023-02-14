@@ -41,8 +41,8 @@ namespace DrEngine::ECS
             if (bPulse)
             {
                 color.SetR(0);
-                color.SetG(static_cast<int>(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f)));
-                color.SetB(static_cast<int>(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f)));
+                color.SetG(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
+                color.SetB(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
             }
 
             if (bVisible)

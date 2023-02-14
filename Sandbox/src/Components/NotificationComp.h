@@ -23,7 +23,7 @@ public:
     
     void Update(float deltaTime) override
     {
-        if (Application::GetMilliseconds() - StartTime > duration)
+        if (Application::GetMilliseconds() - StartTime > static_cast<Uint32>(duration))
         {
             Entity* owner = GetOwner();
             Application::manager->DestroyEntity(owner);

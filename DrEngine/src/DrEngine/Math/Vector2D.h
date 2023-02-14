@@ -18,6 +18,12 @@ namespace DrEngine
             x = n;
             y = n;
         }
+
+        Vector2D(int inX, int inY)
+        {
+            x = static_cast<float>(inX);
+            y = static_cast<float>(inY);
+        }
         
         Vector2D(float inX, float inY)
         {

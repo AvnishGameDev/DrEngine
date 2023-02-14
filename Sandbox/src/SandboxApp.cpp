@@ -15,7 +15,7 @@ using namespace DrEngine::ECS;
 class Sandbox : public DrEngine::Application
 {
 public:
-	Sandbox() : DrEngine::Application("Sandbox", 800, 600, false)
+	Sandbox() : DrEngine::Application("Pong", 800, 600, false)
 	{
 	}
 
