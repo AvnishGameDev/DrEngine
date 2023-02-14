@@ -308,11 +308,68 @@ def DownloadSDLimage():
 
     print('SDL2_image installed Successfully!')
 
+def DownloadSDLmixer():
+    response = requests.get("https://api.github.com/repos/libsdl-org/SDL_mixer/releases/latest")
+    versionNo = response.json()["name"]
+
+    if os.path.exists(f'{os.getcwd()}/../DrEngine/vendor/SDL2_mixer'):
+        f = open(f'{os.getcwd()}/../DrEngine/vendor/SDL2_mixer/version.txt')
+        if f.read() == versionNo:
+            print('SDL2_mixer Up-to date')
+            return
+        else:
+            print('!!!!!!!!!!SDL2_mixer Outdated. Delete DrEngine/Vendor folder then relaunch the script!!!!!!!!!!!!!!!!!!!')
+            print(f'"{os.getcwd()}/../DrEngine/vendor"')
+            exit()
+
+    print('Downloading SDL2_mixer')
+
+    print(f"SDL2_mixer Version: {versionNo}")
+
+    url = f'https://github.com/libsdl-org/SDL_mixer/releases/download/release-{versionNo}/SDL2_mixer-devel-{versionNo}-VC.zip'
+    req = requests.get(url)
+
+    filename = url.split('/')[-1]
+
+    with open(filename, 'wb') as output_file:
+        output_file.write(req.content)
+
+    print('Downloaded SDL2_mixer.')
+
+    print('Starting SDL2_mixer Extraction')
+
+    with zipfile.ZipFile(BytesIO(req.content)) as zf:
+        for member in tqdm(zf.infolist(), desc='Extracting SDL2_mixer '):
+            try:
+                zf.extract(member, os.getcwd())
+            except zipfile.error as e:
+                print(f'Error while extracting SDL2_mixer: {e}')
+                pass
+
+    print('SDL2_mixer extracted Successfully')
+
+    print('Deleting SDL2_mixer Residual Files')
+
+    os.remove(f'{os.getcwd()}/{filename}')
+
+    print('Finalizing SDL2_mixer Setup')
+
+    os.rename(f'SDL2_mixer-{versionNo}', 'SDL2_mixer')
+
+    # writing version.txt
+    with open('SDL2_mixer/version.txt', "w") as f:
+        f.write(versionNo)
+
+    shutil.move(f'{os.getcwd()}/SDL2_mixer', f'{os.getcwd()}/../DrEngine/vendor/SDL2_mixer')
+
+    print('SDL2_mixer installed Successfully!')
+
 DownloadPremake()
 DownloadSPDLOG()
 DownloadSDL()
 DownloadSDLttf()
 DownloadSDLimage()
+DownloadSDLmixer()
 
 print('Setup Complete! Run GenerateProjectFiles.bat to generate Visual Studio 2022 Solution.')
 
