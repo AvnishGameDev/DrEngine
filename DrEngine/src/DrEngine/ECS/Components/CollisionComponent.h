@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../ECS.h"
+#include "TransformComponent.h"
+#include "../Component.h"
+#include "../Entity.h"
 
 using namespace DrEngine;
 using namespace DrEngine::ECS;
@@ -18,7 +20,7 @@ namespace DrEngine::ECS
                 DE_WARN("TransformComponent not found");
             }
 
-            Application::Colliders.push_back(this);
+            Application::AddCollisionComp(this);
         }
 
         TransformComponent* GetTransform() const { return transform; };

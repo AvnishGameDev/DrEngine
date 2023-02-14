@@ -57,6 +57,11 @@ namespace DrEngine::ECS
                     c->Draw(deltaTime);
             }
         }
+
+        virtual void OnCollision(const CollisionData& inData)
+        {
+            
+        }
         
         template<class T, typename... Args>
         T* AddComponent(Args... args)
@@ -125,7 +130,6 @@ namespace DrEngine::ECS
         void SetBatch(Batch inBatch) { batch = inBatch; };
         
     private:
-
         Batch batch;
         
         std::string name;

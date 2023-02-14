@@ -13,6 +13,11 @@
 
 namespace DrEngine
 {
+    namespace ECS
+    {
+        class Entity;
+    }
+    
     struct DRENGINE_API Color
     {
         Color()
@@ -119,5 +124,17 @@ namespace DrEngine
     private:
         SDL_Texture* texture{nullptr};
         std::string imgPath;
+    };
+
+    struct CollisionData
+    {
+        CollisionData(ECS::Entity* inEntity, const bool& inHit = true)
+        {
+            OtherEntity = inEntity;
+            bHit = inHit;
+        }
+        
+        bool bHit = true;
+        ECS::Entity* OtherEntity;
     };
 }

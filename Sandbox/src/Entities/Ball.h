@@ -36,4 +36,11 @@ public:
         Entity::Update(deltaTime);
         
     }
+
+    void OnCollision(const CollisionData& inData) override
+    {
+        Entity::OnCollision(inData);
+
+        DE_INFO("Ball Entity collided with {0}", inData.OtherEntity->GetName());
+    }
 };

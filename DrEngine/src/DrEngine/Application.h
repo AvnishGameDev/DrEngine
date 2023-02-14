@@ -1,6 +1,5 @@
 #pragma once
 
-#include <map>
 #include <vector>
 
 #include "Core.h"
@@ -9,6 +8,7 @@
 namespace DrEngine {
 
 	class InputManager;
+	struct CollisionData;
 	
 	namespace ECS
 	{
@@ -41,6 +41,9 @@ namespace DrEngine {
 		static SDL_Event& GetEvent() { return event; };
 		static float GetDeltaTime() { return DeltaTime; };
 		static Renderer* GetRenderer() { return renderer; };
+
+		/* Collision Helper */
+		static void AddCollisionComp(ECS::CollisionComponent* inComp);
 	private:
 		static Uint32 Milliseconds;
 		static SDL_Event event;

@@ -2,8 +2,9 @@
 #include <bitset>
 #include <vector>
 
-#include "ECS.h"
+#include "Components/CollisionComponent.h"
 #include "Entity.h"
+#include "../Collision.h"
 
 namespace DrEngine::ECS
 {
@@ -42,6 +43,20 @@ namespace DrEngine::ECS
             {
                 if (e)
                     e->Update(deltaTime);
+            }
+            
+            for (const auto c : CollisionComps)
+            {
+                for (const auto c2 : CollisionComps)
+                {
+                    if (c != c2)
+                    {
+                        if (Collision::AABB(c, c2))
+                        {
+                            c->GetOwner()->OnCollision(CollisionData(c2->GetOwner()));
+                        }
+                    }
+                }
             }
         }
 
@@ -89,12 +104,18 @@ namespace DrEngine::ECS
                 e->Draw(deltaTime);
             }
         }
+
+        void AddCollisionComp(CollisionComponent* inComp)
+        {
+            CollisionComps.push_back(inComp);
+        }
         
     private:
         
         std::bitset<MAX_ENTITIES> EntityBitset;
 
         std::vector<Entity*> Entities;
+        std::vector<CollisionComponent*> CollisionComps;
 
         int currentEntitySlot{0};
     

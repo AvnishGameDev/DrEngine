@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ECS.h"
+#include "../Component.h"
 #include "../../Math/Vector2D.h"
 
 namespace DrEngine::ECS
