@@ -17,11 +17,9 @@ namespace DrEngine::ECS
             bPulse = inPulse;
         }
         
-        RectComp(int inR = 0, int inG = 255, int inB = 255)
+        RectComp(const Color& inColor = Color(0, 0, 0, 0))
         {
-            R = inR;
-            G = inG;
-            B = inB;
+            color = inColor;
         }
         
         ~RectComp()
@@ -42,14 +40,14 @@ namespace DrEngine::ECS
         {
             if (bPulse)
             {
-                R = 0;
-                G = static_cast<int>(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
-                B = static_cast<int>(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
+                color.SetR(0);
+                color.SetG(static_cast<int>(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f)));
+                color.SetB(static_cast<int>(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f)));
             }
 
             if (bVisible)
             {
-                Application::GetRenderer()->RenderRect(transform->GetLocation(), transform->GetScale(), Color(R, G, B));
+                Application::GetRenderer()->RenderRect(transform->GetLocation(), transform->GetScale(), color);
             }
         }
 
@@ -60,7 +58,7 @@ namespace DrEngine::ECS
         bool bVisible{true};
         bool bPulse{false};
         
-        int R,G,B;
+        Color color;
         
         TransformComponent* transform;
     };

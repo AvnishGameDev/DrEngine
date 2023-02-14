@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Application.h"
 
 #include <SDL_keyboard.h>
 

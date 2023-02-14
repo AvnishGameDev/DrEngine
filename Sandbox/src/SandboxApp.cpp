@@ -4,13 +4,7 @@
 #pragma warning (pop)
 
 #include "SDL.h"
-#include "Components/BallComponent.h"
-#include "Components/CubeController.h"
-#include "Components/PaddleController.h"
-#include "Components/ScaleBlendComp.h"
-#include "Components/TrigMovement.h"
 
-#include "SDL_ttf.h"
 #include "Components/FpsComp.h"
 #include "Entities/Ball.h"
 #include "Entities/Paddle.h"
@@ -33,10 +27,10 @@ public:
 	{
 		Application::BeginPlay();
 
-		const auto p1 = manager->AddEntity<Paddle>(Vector2D(20, 200), "paddle1");
+		const auto p1 = manager->AddEntity<Paddle>(Vector2D(14, 200), Color(0, 255, 0), "paddle1");
 		paddles.push_back(p1);
 
-		const auto p2 = manager->AddEntity<Paddle>(Vector2D(760, 200), "paddle2");
+		const auto p2 = manager->AddEntity<Paddle>(Vector2D(776, 200), Color(0, 0, 255), "paddle2");
 		paddles.push_back(p2);
 
 		BallRef = manager->AddEntity<Ball>(paddles, "Ball");

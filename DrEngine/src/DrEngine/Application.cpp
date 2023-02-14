@@ -14,7 +14,6 @@ namespace DrEngine {
 	Renderer* Application::renderer = nullptr;
 	SDL_Event Application::event;
 	InputManager* Application::inputManager;
-	std::vector<ECS::CollisionComponent*> Application::Colliders;
 	float Application::DeltaTime = 0.0f;
 	Uint32 Application::Milliseconds = 0;
 

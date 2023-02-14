@@ -2,6 +2,7 @@
 
 #include "DrEngine.h"
 #include "Paddle.h"
+#include "Components/NotificationComp.h"
 
 using namespace DrEngine;
 
@@ -14,7 +15,7 @@ public:
         transform->Location = Vector2D(280, 280);
         transform->Scale = Vector2D(36, 36);
         transform->Velocity = Vector2D(0.28f, -0.28f);
-        AddComponent<RectComp>(0, 0, 0)->SetVisibility(false);
+        AddComponent<RectComp>()->SetVisibility(false);
         AddComponent<CollisionComponent>();
         AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 28, "Score: 0");
         AddComponent<SpriteComponent>("Assets/Images/ball.png");

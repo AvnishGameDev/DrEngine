@@ -30,13 +30,12 @@ namespace DrEngine {
 
 		virtual void Draw(float deltaTime);
 		
-		static InputManager* inputManager;
-		static std::vector<ECS::CollisionComponent*> Colliders;
 		static ECS::Manager* manager;
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
 
+		static InputManager* GetInputManager() { return inputManager; };
 		static Uint32 GetMilliseconds() { return Milliseconds; };
 		static SDL_Event& GetEvent() { return event; };
 		static float GetDeltaTime() { return DeltaTime; };
@@ -45,6 +44,7 @@ namespace DrEngine {
 		/* Collision Helper */
 		static void AddCollisionComp(ECS::CollisionComponent* inComp);
 	private:
+		static InputManager* inputManager;
 		static Uint32 Milliseconds;
 		static SDL_Event event;
 		static float DeltaTime;

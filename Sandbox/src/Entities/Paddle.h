@@ -7,9 +7,13 @@ using namespace DrEngine;
 class Paddle : public Entity
 {
 public:
-    Paddle(const Vector2D& inLoc = Vector2D::Zero(), const std::string& inName = "Paddle") : Entity(inName)
+    Paddle(const Vector2D& inLoc = Vector2D::Zero(), const Color& inColor = Color(0, 0, 255) ,const std::string& inName = "Paddle") : Entity(inName)
     {
-        Location = inLoc;
+        transform = AddComponent<TransformComponent>();
+        transform->Location = inLoc;
+        transform->Scale = Vector2D(10, 100);
+        AddComponent<RectComp>(inColor);
+        AddComponent<CollisionComponent>();
     }
     
     ~Paddle()
@@ -20,22 +24,17 @@ public:
     void BeginPlay() override
     {
         Entity::BeginPlay();
-
-        AddComponent<TransformComponent>();
-        GetComponentByClass<TransformComponent>()->Location = Location;
-        GetComponentByClass<TransformComponent>()->Scale = Vector2D(10, 100);
-        AddComponent<RectComp>(0, 255, 0);
-        AddComponent<CollisionComponent>();
-        AddComponent<PaddleController>();
         
     }
 
     void Update(float deltaTime) override
     {
         Entity::Update(deltaTime);
+
+        transform->Location = Vector2D(transform->GetLocation().X(), Application::GetInputManager()->GetMousePos().Y());
     }
 
 private:
 
-    Vector2D Location{Vector2D::Zero()};
+    TransformComponent* transform;
 };
