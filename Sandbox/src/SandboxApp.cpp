@@ -13,6 +13,7 @@
 #include "SDL_ttf.h"
 #include "Components/FpsComp.h"
 #include "Entities/Ball.h"
+#include "Entities/Paddle.h"
 
 using namespace DrEngine;
 using namespace DrEngine::ECS;
@@ -32,25 +33,13 @@ public:
 	{
 		Application::BeginPlay();
 
-		auto p1 = manager->AddEntity("paddle1");
-		p1->AddComponent<TransformComponent>();
-		p1->GetComponentByClass<TransformComponent>()->Location = Vector2D(20, 200);
-		p1->GetComponentByClass<TransformComponent>()->Scale = Vector2D(10, 100);
-		p1->AddComponent<RectComp>(0, 255, 0);
-		p1->AddComponent<CollisionComponent>();
-		p1->AddComponent<PaddleController>();
+		const auto p1 = manager->AddEntity<Paddle>(Vector2D(20, 200), "paddle1");
 		paddles.push_back(p1);
 
-		auto p2 = manager->AddEntity("paddle2");
-		p2->AddComponent<TransformComponent>();
-		p2->GetComponentByClass<TransformComponent>()->Location = Vector2D(760, 200);
-		p2->GetComponentByClass<TransformComponent>()->Scale = Vector2D(10, 100);
-		p2->AddComponent<RectComp>(0, 0, 255);
-		p2->AddComponent<CollisionComponent>();
-		p2->AddComponent<PaddleController>();
+		const auto p2 = manager->AddEntity<Paddle>(Vector2D(760, 200), "paddle2");
 		paddles.push_back(p2);
 
-		BallRef = manager->AddEntity<Ball>(paddles);
+		BallRef = manager->AddEntity<Ball>(paddles, "Ball");
 
 		FpsCounter = manager->AddEntity("FpsCounter");
 		FpsCounter->AddComponent<FpsComp>();
@@ -75,7 +64,7 @@ public:
 	{
 		Application::Update(deltaTime);
 
-		int ballScore =  BallRef->GetComponentByClass<BallComponent>()->GetScore();
+		const int ballScore = BallRef->GetScore();
 		if (currentScore != ballScore)
 		{
 			currentScore = ballScore;
@@ -97,7 +86,7 @@ public:
 	}
 
 	std::vector<Entity*> paddles;
-	Entity* BallRef;
+	Ball* BallRef;
 	Entity* FpsCounter;
 	Entity* Desc;
 	Entity* bg;

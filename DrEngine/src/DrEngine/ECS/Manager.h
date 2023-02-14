@@ -14,11 +14,11 @@ namespace DrEngine::ECS
     public:
 
         template<class T = Entity, typename... Args>
-        Entity* AddEntity(Args... args)
+        T* AddEntity(Args... args)
         {
-            Entity* e = new T(args...);
+            T* e = new T(args...);
             EntityBitset[currentEntitySlot++] = true;
-            Entities.push_back(e);
+            Entities.push_back(Utils::Cast<Entity>(e));
             e->BeginPlay();
             return e;
         }
