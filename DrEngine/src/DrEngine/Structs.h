@@ -144,17 +144,53 @@ namespace DrEngine
         Audio(const std::string& inFilePath)
         {
             filePath = inFilePath;
+            audio = Mix_LoadWAV(inFilePath.c_str());
+        }
+
+        ~Audio()
+        {
+            Mix_FreeChunk(audio);
+        }
+
+        void PlayAudio(int inLoops = 0)
+        {
+            Mix_PlayChannel(-1, audio, inLoops);
+        }
+        
+        Mix_Chunk* GetSDLChunk() const { return audio; };
+
+        bool IsValid() const { return audio != nullptr; };
+        
+    private:
+        std::string filePath;
+        Mix_Chunk* audio;
+    };
+
+    struct Music
+    {
+        Music(const std::string& inFilePath)
+        {
+            filePath = inFilePath;
             music = Mix_LoadMUS(filePath.c_str());
             if (!music)
             {
                 DE_ERROR("Failed to load music: {0}", Mix_GetError());
             }
         }
+
+        ~Music()
+        {
+            Mix_FreeMusic(music);
+        }
+
+        void PlayMusic(int inLoops = 0)
+        {
+            Mix_PlayMusic(music, inLoops);
+        }
         
         Mix_Music* GetSDLMusic() const { return music; };
 
         bool IsValid() const { return music != nullptr; };
-        
     private:
         std::string filePath;
         Mix_Music* music;

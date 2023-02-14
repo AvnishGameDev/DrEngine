@@ -4,7 +4,6 @@
 #include "Log.h"
 #include "Renderer.h"
 #include "InputManager.h"
-#include "AudioManager.h"
 
 #include "SDL.h"
 #include "SDL_ttf.h"
@@ -18,7 +17,6 @@ namespace DrEngine {
 	float Application::DeltaTime = 0.0f;
 	Uint32 Application::Milliseconds = 0;
 	InputManager* Application::inputManager;
-	AudioManager* Application::audioManager;
 
 	ECS::Manager* Application::manager;
 
@@ -71,6 +69,11 @@ namespace DrEngine {
 		{
 			DE_CORE_ERROR("Mix_Init Error: {0}", Mix_GetError());
 		}
+		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 8, 1024) < 0)
+		{
+			DE_CORE_ERROR("Mix_OpenAudio Error: {0}", Mix_GetError());
+		}
+		Mix_AllocateChannels(32);
 		
 		/* Init Manager */
 		manager = new ECS::Manager();
@@ -115,8 +118,6 @@ namespace DrEngine {
 	{
 		inputManager = new InputManager();
 		inputManager->Init();
-		audioManager = new AudioManager();
-		audioManager->Init();
 	}
 
 	void Application::Update(float deltaTime)

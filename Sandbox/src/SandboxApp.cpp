@@ -51,6 +51,12 @@ public:
 		bg->AddComponent<TransformComponent>()->Scale = Vector2D(800, 600);
 		bg->AddComponent<RectComp>();
 		bg->AddComponent<SpriteComponent>("Assets/Images/bg-updated.jpg");
+
+		bgMusic = new Music("Assets/Audio/bg-music.mp3");
+		if (bgMusic->IsValid())
+		{
+			bgMusic->PlayMusic(-1);	
+		}
 		
 	}
 
@@ -86,6 +92,8 @@ public:
 	Entity* bg;
 
 	int currentScore{0};
+
+	Music* bgMusic{nullptr};
 	
 	int i{0};
 };

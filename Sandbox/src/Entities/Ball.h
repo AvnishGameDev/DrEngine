@@ -34,8 +34,8 @@ public:
         
         transform->Velocity = Vector2D(0.28f, -0.28f);
         
-        boing = new Audio("Assets/Audio/boing.mp3");
-        reset = new Audio("Assets/Audio/reset.mp3");
+        boing = new Audio("Assets/Audio/boing.wav");
+        reset = new Audio("Assets/Audio/reset.wav");
     }
 
     void Update(float deltaTime) override
@@ -55,7 +55,7 @@ public:
 
                 Application::manager->AddEntity()->AddComponent<NotificationComp>("Score Reset!", 1000);
 
-                Application::GetAudioManager()->PlayAudio(reset);
+                reset->PlayAudio();
             }
             if (transform->GetLocation().X() < 0)
             {
@@ -66,7 +66,7 @@ public:
 
                 Application::manager->AddEntity()->AddComponent<NotificationComp>("Score Reset!", 1000);
 
-                Application::GetAudioManager()->PlayAudio(reset);
+                reset->PlayAudio();
             }
             if (transform->GetLocation().Y() > 580)
             {
@@ -98,7 +98,7 @@ public:
                     Score++;
                     if (boing->IsValid())
                     {
-                        Application::GetAudioManager()->PlayAudio(boing);
+                        boing->PlayAudio();
                     }
                     
                     break;

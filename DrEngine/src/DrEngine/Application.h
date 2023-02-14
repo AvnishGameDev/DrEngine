@@ -6,8 +6,7 @@
 #include "Window.h"
 
 namespace DrEngine {
-
-	class AudioManager;
+	
 	class InputManager;
 	struct CollisionData;
 	
@@ -35,8 +34,7 @@ namespace DrEngine {
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
-
-		static AudioManager* GetAudioManager() { return audioManager; };
+		
 		static InputManager* GetInputManager() { return inputManager; };
 		static Uint32 GetMilliseconds() { return Milliseconds; };
 		static SDL_Event& GetEvent() { return event; };
@@ -46,7 +44,6 @@ namespace DrEngine {
 		/* Collision Helper */
 		static void AddCollisionComp(ECS::CollisionComponent* inComp);
 	private:
-		static AudioManager* audioManager;
 		static InputManager* inputManager;
 		static Uint32 Milliseconds;
 		static SDL_Event event;
