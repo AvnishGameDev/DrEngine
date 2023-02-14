@@ -103,6 +103,7 @@ namespace DrEngine
                 DE_ERROR("Failed to create text Texture.");
             }
 
+            TTF_CloseFont(font);
             SDL_FreeSurface(textSurface);
         }
         
