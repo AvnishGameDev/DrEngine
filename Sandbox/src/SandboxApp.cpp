@@ -12,6 +12,7 @@
 
 #include "SDL_ttf.h"
 #include "Components/FpsComp.h"
+#include "Entities/Ball.h"
 
 using namespace DrEngine;
 using namespace DrEngine::ECS;
@@ -49,16 +50,7 @@ public:
 		p2->AddComponent<PaddleController>();
 		paddles.push_back(p2);
 
-		Ball = manager->AddEntity("Ball");
-		Ball->AddComponent<TransformComponent>();
-		Ball->GetComponentByClass<TransformComponent>()->Location = Vector2D(280, 280);
-		Ball->GetComponentByClass<TransformComponent>()->Scale = Vector2D(36, 36);
-		Ball->GetComponentByClass<TransformComponent>()->Velocity = Vector2D(0.28f, -0.28f);
-		Ball->AddComponent<RectComp>(0, 0, 0)->SetVisibility(false);
-		Ball->AddComponent<CollisionComponent>();
-		Ball->AddComponent<BallComponent>(paddles);
-		Ball->AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 28, "Score: 0");
-		Ball->AddComponent<SpriteComponent>("Assets/Images/ball.png");
+		BallRef = manager->AddEntity<Ball>(paddles);
 
 		FpsCounter = manager->AddEntity("FpsCounter");
 		FpsCounter->AddComponent<FpsComp>();
@@ -83,12 +75,12 @@ public:
 	{
 		Application::Update(deltaTime);
 
-		int ballScore =  Ball->GetComponentByClass<BallComponent>()->GetScore();
+		int ballScore =  BallRef->GetComponentByClass<BallComponent>()->GetScore();
 		if (currentScore != ballScore)
 		{
 			currentScore = ballScore;
 			std::string text = "Score: " + std::to_string(currentScore);
-			Ball->GetComponentByClass<TextComp>()->SetText(text);
+			BallRef->GetComponentByClass<TextComp>()->SetText(text);
 		}
 
 		float fps = FpsCounter->GetComponentByClass<FpsComp>()->GetFPS();
@@ -105,7 +97,7 @@ public:
 	}
 
 	std::vector<Entity*> paddles;
-	Entity* Ball;
+	Entity* BallRef;
 	Entity* FpsCounter;
 	Entity* Desc;
 	Entity* bg;

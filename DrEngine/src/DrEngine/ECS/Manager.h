@@ -12,10 +12,10 @@ namespace DrEngine::ECS
     {
     public:
 
-        template<typename... Args>
+        template<class T = Entity, typename... Args>
         Entity* AddEntity(Args... args)
         {
-            auto* e = new Entity(args...);
+            Entity* e = new T(args...);
             EntityBitset[currentEntitySlot++] = true;
             Entities.push_back(e);
             e->BeginPlay();

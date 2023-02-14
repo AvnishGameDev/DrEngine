@@ -35,12 +35,12 @@ namespace DrEngine::ECS
             
         }
 
-        void BeginPlay()
+        virtual void BeginPlay()
         {
             
         }
 
-        void Update(float deltaTime)
+        virtual void Update(float deltaTime)
         {
             for (auto c : Components)
             {
@@ -49,7 +49,7 @@ namespace DrEngine::ECS
             }
         }
 
-        void Draw(float deltaTime)
+        virtual void Draw(float deltaTime)
         {
             for (auto c : Components)
             {
