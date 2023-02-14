@@ -27,18 +27,24 @@ project "DrEngine"
     includedirs
     {
         "%{prj.name}/vendor/spdlog/include",
-        "%{prj.name}/vendor/SDL2/include"
+        "%{prj.name}/vendor/SDL2/include",
+        "%{prj.name}/vendor/SDL2_ttf/include",
+        "%{prj.name}/vendor/SDL2_image/include"
     }
 
     libdirs
     {
-        "%{prj.name}/vendor/SDL2/lib/x64"
+        "%{prj.name}/vendor/SDL2/lib/x64",
+        "%{prj.name}/vendor/SDL2_ttf/lib/x64/",
+        "%{prj.name}/vendor/SDL2_image/lib/x64/"
     }
 
     links
     {
         "SDL2.lib",
-        "SDL2main.lib"
+        "SDL2main.lib",
+        "SDL2_ttf.lib",
+        "SDL2_image.lib"
     }
 
     filter "system:windows"
@@ -55,7 +61,9 @@ project "DrEngine"
         postbuildcommands
         {
             ("{COPY} %{cfg.buildtarget.relpath} ../bin/".. outputdir .. "/Sandbox"), -- %{cfg.buildtarget.relpath} the build path, location of the .dll file in this case
-            ("{COPY} vendor/SDL2/lib/x64/SDL2.dll ../bin/".. outputdir .. "/Sandbox")
+            ("{COPY} vendor/SDL2/lib/x64/SDL2.dll ../bin/".. outputdir .. "/Sandbox"),
+            ("{COPY} vendor/SDL2_ttf/lib/x64/SDL2_ttf.dll ../bin/".. outputdir .. "/Sandbox"),
+            ("{COPY} vendor/SDL2_image/lib/x64/SDL2_image.dll ../bin/".. outputdir .. "/Sandbox")
         }
 
     filter "configurations:Debug"
@@ -82,25 +90,33 @@ project "Sandbox"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/Assets/Fonts/Sans.tff",
+        "%{prj.name}/Assets/**"
     }
 
     includedirs
     {
         "DrEngine/src",
         "DrEngine/vendor/spdlog/include",
-        "DrEngine/vendor/SDL2/include"
+        "DrEngine/vendor/SDL2/include",
+        "DrEngine/vendor/SDL2_ttf/include",
+        "DrEngine/vendor/SDL2_image/include"
     }
 
     libdirs
     {
-        "DrEngine/vendor/SDL2/lib/x64"
+        "DrEngine/vendor/SDL2/lib/x64",
+        "DrEngine/vendor/SDL2_ttf/lib/x64/",
+        "DrEngine/vendor/SDL2_image/lib/x64/"
     }
 
     links
     {
         "DrEngine",
         "SDL2.lib",
-        "SDL2main.lib"
+        "SDL2main.lib",
+        "SDL2_ttf.lib",
+        "SDL2_image.lib"
     }
 
     filter "system:windows"

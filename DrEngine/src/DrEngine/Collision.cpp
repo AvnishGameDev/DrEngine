@@ -10,16 +10,16 @@ namespace DrEngine
     bool Collision::AABB(const CollisionComponent* colA, const CollisionComponent* colB)
     {
         SDL_Rect* rectA = new SDL_Rect();
-        rectA->x = colA->GetTransform()->GetLocation().X();
-        rectA->y = colA->GetTransform()->GetLocation().Y();
-        rectA->w = colA->GetTransform()->GetScale().X();
-        rectA->h = colA->GetTransform()->GetScale().Y();
+        rectA->x = static_cast<int>(colA->GetTransform()->GetLocation().X());
+        rectA->y = static_cast<int>(colA->GetTransform()->GetLocation().Y());
+        rectA->w = static_cast<int>(colA->GetTransform()->GetScale().X());
+        rectA->h = static_cast<int>(colA->GetTransform()->GetScale().Y());
 
         SDL_Rect* rectB = new SDL_Rect();
-        rectB->x = colB->GetTransform()->GetLocation().X();
-        rectB->y = colB->GetTransform()->GetLocation().Y();
-        rectB->w = colB->GetTransform()->GetScale().X();
-        rectB->h = colB->GetTransform()->GetScale().Y();
+        rectB->x = static_cast<int>(colB->GetTransform()->GetLocation().X());
+        rectB->y = static_cast<int>(colB->GetTransform()->GetLocation().Y());
+        rectB->w = static_cast<int>(colB->GetTransform()->GetScale().X());
+        rectB->h = static_cast<int>(colB->GetTransform()->GetScale().Y());
         
         const bool bResult =
         rectA->x + rectA->w >= rectB->x &&

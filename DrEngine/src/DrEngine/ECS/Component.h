@@ -24,12 +24,12 @@ namespace DrEngine::ECS
             
         }
 
-        virtual void Update()
+        virtual void Update(float deltaTime)
         {
             
         }
 
-        virtual void Draw()
+        virtual void Draw(float deltaTime)
         {
             
         }

@@ -25,20 +25,20 @@ namespace DrEngine::ECS
             }
         }
     
-        void Draw() override
+        void Draw(float deltaTime) override
         {
             int X, Y;
-            X = transform->GetLocation().X();
-            Y = transform->GetLocation().Y();
+            X = static_cast<int>(transform->GetLocation().X());
+            Y = static_cast<int>(transform->GetLocation().Y());
         
-            DrawCircle(Application::renderer->GetSDLRenderer(), X, Y, transform->GetScale().X());
+            DrawCircle(X, Y, static_cast<int32_t>(transform->GetScale().X()));
         }
     
     private:
 
         TransformComponent* transform;
     
-        void DrawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius)
+        void DrawCircle(int32_t centreX, int32_t centreY, int32_t radius)
         {
             const int32_t diameter = (radius * 2);
 
@@ -51,14 +51,14 @@ namespace DrEngine::ECS
             while (x >= y)
             {
                 //  Each of the following renders an octant of the circle
-                SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
-                SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
-                SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
-                SDL_RenderDrawPoint(renderer, centreX - x, centreY + y);
-                SDL_RenderDrawPoint(renderer, centreX + y, centreY - x);
-                SDL_RenderDrawPoint(renderer, centreX + y, centreY + x);
-                SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
-                SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
+                Application::GetRenderer()->RenderPoint(Vector2D(centreX + x, centreY - y));
+                Application::GetRenderer()->RenderPoint(Vector2D(centreX + x, centreY + y));
+                Application::GetRenderer()->RenderPoint(Vector2D(centreX - x, centreY - y));
+                Application::GetRenderer()->RenderPoint(Vector2D(centreX - x, centreY + y));
+                Application::GetRenderer()->RenderPoint(Vector2D(centreX + y, centreY - x));
+                Application::GetRenderer()->RenderPoint(Vector2D(centreX + y, centreY + x));
+                Application::GetRenderer()->RenderPoint(Vector2D(centreX - y, centreY - x));
+                Application::GetRenderer()->RenderPoint(Vector2D(centreX - y, centreY + x));
 
                 if (error <= 0)
                 {

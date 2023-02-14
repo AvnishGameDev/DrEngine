@@ -2,8 +2,9 @@
 #include <bitset>
 #include <vector>
 
-#include "ECS.h"
+#include "Components/CollisionComponent.h"
 #include "Entity.h"
+#include "../Collision.h"
 
 namespace DrEngine::ECS
 {
@@ -12,12 +13,12 @@ namespace DrEngine::ECS
     {
     public:
 
-        template<typename... Args>
-        Entity* AddEntity(Args... args)
+        template<class T = Entity, typename... Args>
+        T* AddEntity(Args... args)
         {
-            auto* e = new Entity(args...);
+            T* e = new T(args...);
             EntityBitset[currentEntitySlot++] = true;
-            Entities.push_back(e);
+            Entities.push_back(Utils::Cast<Entity>(e));
             e->BeginPlay();
             return e;
         }
@@ -36,16 +37,30 @@ namespace DrEngine::ECS
             }
         }
         
-        void Update()
+        void Update(float deltaTime)
         {
             for (auto e : Entities)
             {
                 if (e)
-                    e->Update();
+                    e->Update(deltaTime);
+            }
+            
+            for (const auto c : CollisionComps)
+            {
+                for (const auto c2 : CollisionComps)
+                {
+                    if (c != c2)
+                    {
+                        if (Collision::AABB(c, c2))
+                        {
+                            c->GetOwner()->OnCollision(CollisionData(c2->GetOwner()));
+                        }
+                    }
+                }
             }
         }
 
-        void Draw()
+        void Draw(float deltaTime)
         {
             std::vector<Entity*> TileEntities;
             std::vector<Entity*> PropEntities;
@@ -74,20 +89,25 @@ namespace DrEngine::ECS
 
             for (auto e : TileEntities)
             {
-                e->Draw();
+                e->Draw(deltaTime);
             }
             for (auto e : PropEntities)
             {
-                e->Draw();
+                e->Draw(deltaTime);
             }
             for (auto e : PlayerEntities)
             {
-                e->Draw();
+                e->Draw(deltaTime);
             }
             for (auto e : PlayerCompEntities)
             {
-                e->Draw();
+                e->Draw(deltaTime);
             }
+        }
+
+        void AddCollisionComp(CollisionComponent* inComp)
+        {
+            CollisionComps.push_back(inComp);
         }
         
     private:
@@ -95,6 +115,7 @@ namespace DrEngine::ECS
         std::bitset<MAX_ENTITIES> EntityBitset;
 
         std::vector<Entity*> Entities;
+        std::vector<CollisionComponent*> CollisionComps;
 
         int currentEntitySlot{0};
     

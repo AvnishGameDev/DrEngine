@@ -1,6 +1,5 @@
 #pragma once
 
-#include <map>
 #include <vector>
 
 #include "Core.h"
@@ -9,6 +8,7 @@
 namespace DrEngine {
 
 	class InputManager;
+	struct CollisionData;
 	
 	namespace ECS
 	{
@@ -26,20 +26,30 @@ namespace DrEngine {
 
 		virtual void BeginPlay();
 		
-		virtual void Update();
+		virtual void Update(float deltaTime);
 
-		virtual void Draw();
-
-		static Renderer* renderer;
-		static SDL_Event event;
-		static InputManager* inputManager;
-		static std::vector<ECS::CollisionComponent*> Colliders;
+		virtual void Draw(float deltaTime);
+		
+		static ECS::Manager* manager;
 		
 		/* Getters and Setters */
 		Window* GetWindow() const { return window; }
-		
-		ECS::Manager* manager;
+
+		static InputManager* GetInputManager() { return inputManager; };
+		static Uint32 GetMilliseconds() { return Milliseconds; };
+		static SDL_Event& GetEvent() { return event; };
+		static float GetDeltaTime() { return DeltaTime; };
+		static Renderer* GetRenderer() { return renderer; };
+
+		/* Collision Helper */
+		static void AddCollisionComp(ECS::CollisionComponent* inComp);
 	private:
+		static InputManager* inputManager;
+		static Uint32 Milliseconds;
+		static SDL_Event event;
+		static float DeltaTime;
+		static Renderer* renderer;
+		
 		Window* window;
 
 		char* AppName = "App";

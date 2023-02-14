@@ -6,6 +6,7 @@
 #include "../Core.h"
 #include "../Application.h"
 #include "../Renderer.h"
+#include "../Structs.h"
 
 #include "ECS_Utils.h"
 
@@ -17,4 +18,6 @@
 #include "Components/TransformComponent.h"
 #include "Components/CircleComp.h"
 #include "Components/CollisionComponent.h"
+#include "Components/TextComp.h"
+#include "Components/SpriteComponent.h"
 

@@ -18,6 +18,12 @@ namespace DrEngine
             x = n;
             y = n;
         }
+
+        Vector2D(int inX, int inY)
+        {
+            x = static_cast<float>(inX);
+            y = static_cast<float>(inY);
+        }
         
         Vector2D(float inX, float inY)
         {
@@ -67,11 +73,19 @@ namespace DrEngine
             return *this;
         }
 
-        Vector2D operator *= (const int n)
+        Vector2D operator *= (const float n)
         {
-            this->SetX(this->x * n);
+            this->SetX(this->X() * n);
             this->SetY(this->Y() * n);
             return *this;
+        }
+
+        Vector2D operator * (const float n)
+        {
+            Vector2D finalVec;
+            finalVec.SetX(this->X() * n);
+            finalVec.SetY(this->Y() * n);
+            return finalVec;
         }
         
     private:

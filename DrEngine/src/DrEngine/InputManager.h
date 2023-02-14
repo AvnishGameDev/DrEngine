@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Application.h"
 
 #include <SDL_keyboard.h>
 
@@ -34,14 +35,14 @@ namespace DrEngine
         void PollEvent()
         {
             /* Set Mouse Coordinates */
-            if (Application::event.type == SDL_MOUSEMOTION)
+            if (Application::GetEvent().type == SDL_MOUSEMOTION)
             {
                 int x, y;
                 SDL_GetMouseState(&x, &y);
-                Vector2D CurrentPos{Vector2D(x, y)};
+                const Vector2D CurrentPos{Vector2D(static_cast<float>(x), static_cast<float>(y))};
                 MouseDeltaPos = CurrentPos - MousePos;
-                MousePos.SetX(x);
-                MousePos.SetY(y);
+                MousePos.SetX(static_cast<float>(x));
+                MousePos.SetY(static_cast<float>(y));
             }
             else
             {
@@ -50,24 +51,24 @@ namespace DrEngine
             
             /* Set Mouse Button down */
             
-            if (Application::event.type == SDL_MOUSEBUTTONDOWN)
+            if (Application::GetEvent().type == SDL_MOUSEBUTTONDOWN)
             {
-                if (Application::event.button.button == SDL_BUTTON_LEFT)
+                if (Application::GetEvent().button.button == SDL_BUTTON_LEFT)
                 {
                     mouseLeftDown = true;
                 }
-                if (Application::event.button.button == SDL_BUTTON_RIGHT)
+                if (Application::GetEvent().button.button == SDL_BUTTON_RIGHT)
                 {
                     mouseRightDown = true;
                 }
             }
-            else if (Application::event.type == SDL_MOUSEBUTTONUP)
+            else if (Application::GetEvent().type == SDL_MOUSEBUTTONUP)
             {
-                if (Application::event.button.button == SDL_BUTTON_LEFT)
+                if (Application::GetEvent().button.button == SDL_BUTTON_LEFT)
                 {
                     mouseLeftDown = false;
                 }
-                if (Application::event.button.button == SDL_BUTTON_RIGHT)
+                if (Application::GetEvent().button.button == SDL_BUTTON_RIGHT)
                 {
                     mouseRightDown = false;
                 }
@@ -94,6 +95,7 @@ namespace DrEngine
                 return mouseRightDown;
                 break;
             }
+            return false;
         }
 
         Vector2D GetMousePos() const { return MousePos; };

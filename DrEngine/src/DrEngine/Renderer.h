@@ -1,15 +1,16 @@
 #pragma once
 
 #include "Core.h"
+#include "Math/Vector2D.h"
+
+struct SDL_Renderer;
 
 namespace DrEngine
 {
     class Window;
-}
-class SDL_Renderer;
-
-namespace DrEngine
-{
+    struct Color;
+    struct Texture;
+    
     class DRENGINE_API Renderer
     {
     public:
@@ -17,6 +18,10 @@ namespace DrEngine
         ~Renderer();
 
         bool Initialize(Window* window);
+
+        void RenderRect(const Vector2D& Location, const Vector2D& Scale, const Color& color);
+        void RenderTexture(const Vector2D& Location, const Vector2D& Scale, const Texture* texture);
+        void RenderPoint(const Vector2D& Location);
     
         SDL_Renderer* GetSDLRenderer() const { return SDLrenderer; };
     

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ECS.h"
+#include "../Component.h"
 #include "../../Math/Vector2D.h"
 
 namespace DrEngine::ECS
@@ -20,9 +20,9 @@ namespace DrEngine::ECS
             
         }
 
-        void Update() override
+        void Update(float deltaTime) override
         {
-            Location += Velocity;
+            Location += Velocity * deltaTime;
         }
 
         Vector2D GetLocation() const { return Location; };

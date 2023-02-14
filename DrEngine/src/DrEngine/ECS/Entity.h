@@ -35,27 +35,32 @@ namespace DrEngine::ECS
             
         }
 
-        void BeginPlay()
+        virtual void BeginPlay()
         {
             
         }
 
-        void Update()
+        virtual void Update(float deltaTime)
         {
             for (auto c : Components)
             {
                 if (c)
-                    c->Update();
+                    c->Update(deltaTime);
             }
         }
 
-        void Draw()
+        virtual void Draw(float deltaTime)
         {
             for (auto c : Components)
             {
                 if (c)
-                    c->Draw();
+                    c->Draw(deltaTime);
             }
+        }
+
+        virtual void OnCollision(const CollisionData& inData)
+        {
+            
         }
         
         template<class T, typename... Args>
@@ -125,7 +130,6 @@ namespace DrEngine::ECS
         void SetBatch(Batch inBatch) { batch = inBatch; };
         
     private:
-
         Batch batch;
         
         std::string name;
