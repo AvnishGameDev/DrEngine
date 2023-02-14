@@ -8,14 +8,15 @@
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include "SDL_image.h"
+#include "SDL_mixer.h"
 
 namespace DrEngine {
 
 	Renderer* Application::renderer = nullptr;
 	SDL_Event Application::event;
-	InputManager* Application::inputManager;
 	float Application::DeltaTime = 0.0f;
 	Uint32 Application::Milliseconds = 0;
+	InputManager* Application::inputManager;
 
 	ECS::Manager* Application::manager;
 
@@ -56,11 +57,23 @@ namespace DrEngine {
 		}
 
 		/* Image Init */
-		constexpr int flags = IMG_INIT_PNG | IMG_INIT_JPG;
-		if (IMG_Init(flags) != flags)
+		constexpr int ImgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+		if (IMG_Init(ImgFlags) != ImgFlags)
 		{
 			DE_CORE_ERROR("IMG_Init Error: {0}", IMG_GetError());
 		}
+
+		/* Mixer Init */
+		constexpr int MixerFlags = 0 | MIX_INIT_MP3;
+		if (Mix_Init(MixerFlags) != MixerFlags)
+		{
+			DE_CORE_ERROR("Mix_Init Error: {0}", Mix_GetError());
+		}
+		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 8, 1024) < 0)
+		{
+			DE_CORE_ERROR("Mix_OpenAudio Error: {0}", Mix_GetError());
+		}
+		Mix_AllocateChannels(32);
 		
 		/* Init Manager */
 		manager = new ECS::Manager();
@@ -104,6 +117,7 @@ namespace DrEngine {
 	void Application::BeginPlay()
 	{
 		inputManager = new InputManager();
+		inputManager->Init();
 	}
 
 	void Application::Update(float deltaTime)
