@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SDL_rect.h>
+
 #include "Core.h"
 #include "Math/Vector2D.h"
 
@@ -20,7 +22,7 @@ namespace DrEngine
         bool Initialize(Window* window);
 
         void RenderRect(const Vector2D& Location, const Vector2D& Scale, const Color& color);
-        void RenderTexture(const Vector2D& Location, const Vector2D& Scale, const Texture* texture);
+        void RenderTexture(const Vector2D& Location, const Vector2D& Scale, const Texture* texture, const SDL_Rect* inSrcRect = nullptr);
         void RenderPoint(const Vector2D& Location);
     
         SDL_Renderer* GetSDLRenderer() const { return SDLrenderer; };

@@ -51,7 +51,7 @@ public:
 		bg->AddComponent<TransformComponent>()->Scale = Vector2D(800, 600);
 		bg->AddComponent<RectComp>();
 		bg->AddComponent<SpriteComponent>("Assets/Images/bg-updated.jpg");
-
+		
 		bgMusic = new Music("Assets/Audio/bg-music.mp3");
 		if (bgMusic->IsValid())
 		{

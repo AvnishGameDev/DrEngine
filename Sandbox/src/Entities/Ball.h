@@ -1,7 +1,6 @@
 #pragma once
 
 #include "DrEngine.h"
-#include "Paddle.h"
 #include "Components/NotificationComp.h"
 
 using namespace DrEngine;
