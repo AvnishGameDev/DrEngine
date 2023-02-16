@@ -34,6 +34,7 @@ namespace DrEngine
         
         void Update()
         {
+            prevKeyboardState = KeyboardState;
             KeyboardState = SDL_GetKeyboardState(nullptr);
         }
 
@@ -60,11 +61,33 @@ namespace DrEngine
             {
                 if (Application::GetEvent().button.button == SDL_BUTTON_LEFT)
                 {
-                    mouseLeftDown = true;
+                    if (!mouseLeftDown)
+                    {
+                        mouseLeftDown = true;
+                    }
+                    if (mouseLeftDown && prevMouseLeftDown == false)
+                    {
+                        prevMouseLeftDown = true;
+                        for (const auto& f : mouseCallbacks)
+                        {
+                            f(Left);
+                        }
+                    }
                 }
                 if (Application::GetEvent().button.button == SDL_BUTTON_RIGHT)
                 {
-                    mouseRightDown = true;
+                    if (!mouseRightDown)
+                    {
+                        mouseRightDown = true;
+                    }
+                    if (mouseRightDown && prevMouseRightDown == false)
+                    {
+                        prevMouseRightDown = true;
+                        for (const auto& f : mouseCallbacks)
+                        {
+                            f(Right);
+                        }
+                    }
                 }
             }
             else if (Application::GetEvent().type == SDL_MOUSEBUTTONUP)
@@ -72,15 +95,23 @@ namespace DrEngine
                 if (Application::GetEvent().button.button == SDL_BUTTON_LEFT)
                 {
                     mouseLeftDown = false;
+                    prevMouseLeftDown = false;
                 }
                 if (Application::GetEvent().button.button == SDL_BUTTON_RIGHT)
                 {
                     mouseRightDown = false;
+                    prevMouseRightDown = false;
                 }
             }
         }
 
         void ResetMouseDelta() { MouseDeltaPos = Vector2D::Zero(); };
+
+        template <class T>
+        void AddCallback(T* ref, void (T::* const inCallback)(MouseKey))
+        {
+            mouseCallbacks.push_back(std::bind(inCallback, ref, std::placeholders::_1));
+        }
         
         /* Getters */
         
@@ -108,11 +139,15 @@ namespace DrEngine
 
     private:
 
+        std::vector<std::function<void(MouseKey)>> mouseCallbacks;
+        
+        bool prevMouseLeftDown, prevMouseRightDown;
         bool mouseLeftDown, mouseRightDown;
 
         Vector2D MouseDeltaPos;
         Vector2D MousePos;
-        
+
+        const Uint8* prevKeyboardState;
         const Uint8* KeyboardState;
     };
 }
