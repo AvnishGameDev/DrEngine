@@ -5,10 +5,6 @@
 
 #include "SDL.h"
 
-#include "Components/FpsComp.h"
-#include "Entities/Ball.h"
-#include "Entities/Paddle.h"
-
 using namespace DrEngine;
 using namespace DrEngine::ECS;
 
