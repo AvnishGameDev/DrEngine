@@ -127,7 +127,6 @@ project "Sandbox"
 
     postbuildcommands
     {
-        ("{MKDIR} ../" .. outputdir .. "/Sandbox/Assets"),
         ("{COPY} Assets ../bin/".. outputdir .. "/Sandbox/Assets")
     }
 

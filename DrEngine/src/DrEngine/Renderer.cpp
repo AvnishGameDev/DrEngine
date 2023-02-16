@@ -38,7 +38,7 @@ namespace DrEngine
         delete rect;
     }
 
-    void Renderer::RenderTexture(const Vector2D& Location, const Vector2D& Scale, const Texture* texture)
+    void Renderer::RenderTexture(const Vector2D& Location, const Vector2D& Scale, const Texture* texture, const SDL_Rect* inSrcRect)
     {
         SDL_Rect* rect = new SDL_Rect();
         rect->x = static_cast<int>(Location.X());
@@ -48,7 +48,7 @@ namespace DrEngine
             
         if (texture && texture->IsValid())
         {
-            SDL_RenderCopy(SDLrenderer, texture->GetSDLTexture(), nullptr, rect);
+            SDL_RenderCopy(SDLrenderer, texture->GetSDLTexture(), inSrcRect, rect);
         }
         else
         {

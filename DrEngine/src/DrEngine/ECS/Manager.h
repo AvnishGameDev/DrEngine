@@ -53,7 +53,7 @@ namespace DrEngine::ECS
                     {
                         if (Collision::AABB(c, c2))
                         {
-                            c->GetOwner()->OnCollision(CollisionData(c2->GetOwner()));
+                            c->OnCollision(CollisionData(c2->GetOwner()));
                         }
                     }
                 }

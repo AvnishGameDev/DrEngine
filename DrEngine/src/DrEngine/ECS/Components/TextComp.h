@@ -2,6 +2,7 @@
 
 #include "../ECS.h"
 #include "SDL_ttf.h"
+#include "../Math/Math.h"
 
 namespace DrEngine::ECS
 {
@@ -29,8 +30,8 @@ namespace DrEngine::ECS
             {
                 Color color;
                 color.SetR(0);
-                color.SetG(SDL_fabsf(SDL_cosf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
-                color.SetB(SDL_fabsf(SDL_sinf(static_cast<float>(SDL_GetTicks()) / 1000.0f) * 255.0f));
+                color.SetG(Math::AbsF(Math::CosF(static_cast<float>(Application::GetMilliseconds()) / 1000.0f) * 255.0f));
+                color.SetB(Math::AbsF(Math::SinF(static_cast<float>(Application::GetMilliseconds()) / 1000.0f) * 255.0f));
                 
                 SetColor(color);
             }

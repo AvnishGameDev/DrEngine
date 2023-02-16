@@ -23,9 +23,25 @@ namespace DrEngine::ECS
             Application::AddCollisionComp(this);
         }
 
+        void OnCollision(const CollisionData& inData)
+        {
+            for (const auto& f : callbacks)
+            {
+                f(inData);
+            }
+        }
+
+        template <class T>
+        void AddCallback(T* obj, void(T::* const inCallback)(const CollisionData&))
+        {
+            callbacks.push_back(std::bind(inCallback, obj, std::placeholders::_1));
+        }
+        
         TransformComponent* GetTransform() const { return transform; };
 
     private:
         TransformComponent* transform{nullptr};
+
+        std::vector<std::function<void(const CollisionData&)>> callbacks;
     };
 }

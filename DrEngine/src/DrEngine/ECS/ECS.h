@@ -20,4 +20,5 @@
 #include "Components/CollisionComponent.h"
 #include "Components/TextComp.h"
 #include "Components/SpriteComponent.h"
+#include "Components/AnimationComp.h"
 
