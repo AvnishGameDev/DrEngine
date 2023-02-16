@@ -14,9 +14,9 @@ public:
         transform->Location = Vector2D(280, 280);
         transform->Scale = Vector2D(36, 36);
         AddComponent<RectComp>()->SetVisibility(false);
-        AddComponent<CollisionComponent>();
         AddComponent<TextComp>("Assets/Fonts/Sans.ttf", 28, "Score: 0");
         AddComponent<SpriteComponent>("Assets/Images/ball.png");
+        AddComponent<CollisionComponent>()->AddCallback(this, &Ball::OnCollision);
 
         paddles = inPaddles;
         now = Application::GetMilliseconds();
@@ -82,10 +82,8 @@ public:
         }
     }
 
-    void OnCollision(const CollisionData& inData) override
+    void OnCollision(const CollisionData& inData)
     {
-        Entity::OnCollision(inData);
-
         if (Application::GetMilliseconds() - last > 100)
         {
             for (const auto p : paddles)

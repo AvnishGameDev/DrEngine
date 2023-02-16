@@ -57,11 +57,6 @@ namespace DrEngine::ECS
                     c->Draw(deltaTime);
             }
         }
-
-        virtual void OnCollision(const CollisionData& inData)
-        {
-            
-        }
         
         template<class T, typename... Args>
         T* AddComponent(Args... args)
