@@ -23,16 +23,19 @@ namespace DrEngine::ECS
             return e;
         }
         
-        void DestroyEntity(Entity*& e)
+        void DestroyEntity(Entity* e)
         {
-            for (auto itr = Entities.begin(); itr < Entities.end(); ++itr)
+            if (e)
             {
-                if (*itr == e)
+                for (auto itr = Entities.begin(); itr < Entities.end(); ++itr)
                 {
-                    EntityBitset[std::distance(Entities.begin(), itr)] = false;
-                    Entities.erase(itr);
-                    delete e;
-                    e = nullptr;
+                    if (*itr == e)
+                    {
+                        EntityBitset[std::distance(Entities.begin(), itr)] = false;
+                        Entities.erase(itr);
+                        delete e;
+                        e = nullptr;
+                    }
                 }
             }
         }
