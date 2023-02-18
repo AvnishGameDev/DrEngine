@@ -24,7 +24,7 @@ namespace DrEngine::ECS
             transform = GetOwner()->GetComponentByClass<TransformComponent>();
             if (!transform)
             {
-                DE_ERROR("Failed to get Transform Component");
+                DE_ERROR("Transform component not found for SpriteComponent on Entity {0}", GetOwner()->GetName());
             }
         }
 
