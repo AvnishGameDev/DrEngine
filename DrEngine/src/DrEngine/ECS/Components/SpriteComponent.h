@@ -32,15 +32,20 @@ namespace DrEngine::ECS
         {
             if (texture)
             {
-                Application::GetRenderer()->RenderTexture(transform->GetLocation(), transform->GetScale(), texture);
+                Application::GetRenderer()->RenderTexture(transform->GetLocation(), transform->GetScale(), texture, nullptr, flip);
             }
             else
             {
                 DE_ERROR("texture not valid!");
             }
         }
+
+        void SetFlip(TextureFlip inFlip) { flip = inFlip; };
+        
     private:
 
+        TextureFlip flip{None};
+        
         TransformComponent* transform{nullptr};
 
         Texture* texture;
