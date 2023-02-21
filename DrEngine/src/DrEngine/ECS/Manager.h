@@ -17,10 +17,29 @@ namespace DrEngine::ECS
         T* AddEntity(Args... args)
         {
             T* e = new T(args...);
-            std::unique_ptr<Entity> uPtr{e};
-            Entities.emplace_back(std::move(uPtr));
+            EntityBitset[currentEntitySlot++] = true;
+            Entities.push_back(Utils::Cast<Entity>(e));
             e->BeginPlay();
             return e;
+        }
+        
+        void DestroyEntity(const Entity* e)
+        {
+            if (e)
+            {
+                for (auto itr = Entities.begin(); itr < Entities.end(); ++itr)
+                {
+                    if (*itr == e)
+                    {
+                        delete *itr;
+                        e = nullptr;
+                        *itr = nullptr;
+                        EntityBitset[std::distance(Entities.begin(), itr)] = false;
+                        Entities.erase(itr);
+                        Entities.at(std::distance(Entities.begin(), itr)) = nullptr;
+                    }
+                }
+            }
         }
         
         void Update(float deltaTime)
@@ -101,20 +120,6 @@ namespace DrEngine::ECS
             }
         }
 
-        void Refresh()
-        {
-            Entities.erase(std::remove_if(
-                std::begin(Entities),
-                std::end(Entities),
-                [](const std::unique_ptr<Entity>& inEntity)
-                {
-                    return !inEntity->IsActive();
-                }
-                ),
-                std::end(Entities)
-                );
-        }
-
         void AddCollisionComp(CollisionComponent* inComp)
         {
             CollisionComps.push_back(inComp);
@@ -122,7 +127,9 @@ namespace DrEngine::ECS
         
     private:
         
-        std::vector<std::unique_ptr<Entity>> Entities;
+        std::bitset<MAX_ENTITIES> EntityBitset;
+
+        std::vector<Entity*> Entities;
         std::vector<CollisionComponent*> CollisionComps;
 
         int currentEntitySlot{0};
