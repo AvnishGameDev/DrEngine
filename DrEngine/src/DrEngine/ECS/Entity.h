@@ -28,16 +28,12 @@ namespace DrEngine::ECS
             name = rand();
             batch = inBatch;
         }
-        
-        virtual ~Entity()
-        {
-            for (auto c : Components)
-            {
-                delete c;
-            }
-        }
+
+        void Destroy() { bActive = false; };
 
         bool IsInit() const { return bInit; };
+
+        bool IsActive() const { return bActive; };
         
         virtual void BeginPlay()
         {
@@ -65,22 +61,12 @@ namespace DrEngine::ECS
         template<class T, typename... Args>
         T* AddComponent(Args... args)
         {
-            auto* c = new T(args...);
+            T* c(new T(std::forward<Args>(args)...));
             c->owner = this;
+            std::unique_ptr<Component> uPtr{c};
+            Components.emplace_back(std::move(uPtr));
             c->BeginPlay();
-            Components.push_back(c);
             return c;
-        }
-
-        void RemoveComponent(Component* c)
-        {
-            for (auto itr = Components.begin(); itr < Components.end(); ++itr)
-            {
-                if (*itr == c)
-                {
-                    Components.erase(itr);
-                }
-            }
         }
         
         template<class T>
@@ -133,9 +119,10 @@ namespace DrEngine::ECS
         
         std::string name;
         
-        std::vector<Component*> Components;
+        std::vector<std::unique_ptr<Component>> Components;
 
         bool bInit{false};
+        bool bActive{true};
         
     };
 }

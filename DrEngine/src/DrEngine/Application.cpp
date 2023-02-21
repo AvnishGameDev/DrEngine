@@ -106,7 +106,8 @@ namespace DrEngine {
 					return;
 				}
 			}
-			
+
+			manager->Refresh();
 			Update(DeltaTime);
 			Draw(DeltaTime);
 			
