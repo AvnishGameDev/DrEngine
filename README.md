@@ -1,4 +1,4 @@
-![-DrEngine-blue](https://user-images.githubusercontent.com/64523755/218263207-7300e0fd-d4e6-43d1-a375-12e8f12e83c3.svg) ![Developer-AvnishGameDev-blue](https://user-images.githubusercontent.com/64523755/218263243-6fc911b1-b9b1-4a83-9ec4-3783f456610c.svg) ![Status-Under Development-brightgreen](https://user-images.githubusercontent.com/64523755/218263269-cd9e1da2-ce9b-4b8a-811a-b1f501c9060b.svg) ![Language-C++-yellow](https://user-images.githubusercontent.com/64523755/218263304-bfb8792e-86ff-46a5-a8e4-8666a93ab611.svg)
+![-DrEngine-blue](https://user-images.githubusercontent.com/64523755/218263207-7300e0fd-d4e6-43d1-a375-12e8f12e83c3.svg) ![Developer-AvnishGameDev-blue](https://user-images.githubusercontent.com/64523755/218263243-6fc911b1-b9b1-4a83-9ec4-3783f456610c.svg) ![Status-Stopped-lightgrey](https://github.com/AvnishGameDev/DrEngine/assets/64523755/e0f4e279-83f8-4272-aca8-a01323ae1eb8) ![Language-C++-yellow](https://user-images.githubusercontent.com/64523755/218263304-bfb8792e-86ff-46a5-a8e4-8666a93ab611.svg)
 
 
 
