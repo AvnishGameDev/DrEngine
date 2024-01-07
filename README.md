@@ -5,7 +5,6 @@
 # DrEngine
 
 **Development Halted.**
-Developed by AvnishGameDev.
 
 ## Pre-Requisites
 * <img src="https://user-images.githubusercontent.com/64523755/218263335-b7f765a8-466d-4d59-bfe7-a7fd5ce4ca6b.png"  width="24" height="24"> **Python 10** or above
